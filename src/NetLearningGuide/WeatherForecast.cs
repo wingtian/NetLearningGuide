@@ -1,6 +1,6 @@
 using System;
 
-namespace NetLeaningGuide
+namespace NetLearningGuide
 {
     public class WeatherForecast
     {

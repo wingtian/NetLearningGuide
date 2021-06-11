@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace NetLeaningGuide.UnitTest
+namespace NetLearningGuide.UnitTest
 {
     public class UnitTest1
     {

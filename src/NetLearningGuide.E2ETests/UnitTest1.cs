@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace NetLeaningGuide.IntegrationTests
+namespace NetLearningGuide.E2ETests
 {
     public class UnitTest1
     {

@@ -5,9 +5,9 @@
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyName>NetLeaningGuide.UnitTest</AssemblyName>
+    <AssemblyName>NetLearningGuide.UnitTest</AssemblyName>
 
-    <RootNamespace>NetLeaningGuide.UnitTest</RootNamespace>
+    <RootNamespace>NetLearningGuide.UnitTest</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

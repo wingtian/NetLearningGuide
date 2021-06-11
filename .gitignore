@@ -19,3 +19,15 @@
 /src/NetLeaningGuide.Message/bin/Debug/netstandard2.0
 /src/NetLeaningGuide.UnitTest/obj
 /src/NetLeaningGuide.UnitTest/bin/Debug/netcoreapp3.1
+/src/NetLearningGuide/bin/Debug/net5.0
+/src/NetLearningGuide/obj
+/src/NetLearningGuide.Core/obj
+/src/NetLearningGuide.Core/bin/Debug
+/src/NetLearningGuide.E2ETests/obj
+/src/NetLearningGuide.E2ETests/bin/Debug/netcoreapp3.1
+/src/NetLearningGuide.IntegrationTests/obj
+/src/NetLearningGuide.IntegrationTests/bin/Debug/netcoreapp3.1
+/src/NetLearningGuide.Message/obj
+/src/NetLearningGuide.Message/bin/Debug/netstandard2.0
+/src/NetLearningGuide.UnitTest/obj
+/src/NetLearningGuide.UnitTest/bin/Debug/netcoreapp3.1
