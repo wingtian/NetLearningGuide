@@ -9,3 +9,13 @@
 /src/NetLeaningGuide/bin/Debug/net5.0
 /src/.vs/NetLeaningGuide
 /src/NetLeaningGuide/obj
+/src/NetLeaningGuide.Core/obj
+/src/NetLeaningGuide.Core/bin/Debug
+/src/NetLeaningGuide.E2ETests/obj
+/src/NetLeaningGuide.E2ETests/bin/Debug/netcoreapp3.1
+/src/NetLeaningGuide.IntegrationTests/obj
+/src/NetLeaningGuide.IntegrationTests/bin/Debug/netcoreapp3.1
+/src/NetLeaningGuide.Message/obj
+/src/NetLeaningGuide.Message/bin/Debug/netstandard2.0
+/src/NetLeaningGuide.UnitTest/obj
+/src/NetLeaningGuide.UnitTest/bin/Debug/netcoreapp3.1
