@@ -6,3 +6,7 @@
 /NetLeaningGuide/NetLeaningGuide/bin/Debug/net5.0
 /.vs
 /NetLeaningGuide/.vs/NetLeaningGuide/v16
+/src/NetLeaningGuide/bin/Debug/net5.0
+/src/NetLeaningGuide/Controllers/WeatherForecastController.cs
+/src/.vs/NetLeaningGuide
+/src/NetLeaningGuide/obj
