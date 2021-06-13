@@ -1,6 +1,6 @@
 ﻿namespace NetLearningGuide.Message.Basic
 {
-    public class CommonResponseResponse<T> : ICommonResponse<T>
+    public class CommonResponse<T> : ICommonResponse<T>
     {
         public int Code { get; set; }
         public string Message { get; set; }

@@ -4,6 +4,10 @@ namespace NetLearningGuide.Core.Exceptions
 {
     public class BusinessException : Exception, IBusinessException
     {
-        public int Code { get; set; } = 0;
+        public BusinessException(int code, string message) : base(message)
+        {
+            Code = code;
+        }
+        public int Code { get; set; }
     }
 }

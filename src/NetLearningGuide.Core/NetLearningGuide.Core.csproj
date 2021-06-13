@@ -12,12 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\CommandHandlers\" />
-    <Folder Include="Handlers\EventHandlers\" />
-    <Folder Include="Handlers\RequestHandlers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\NetLearningGuide.Message\NetLearningGuide.Message.csproj" />
   </ItemGroup>
 

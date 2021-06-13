@@ -31,3 +31,7 @@
 /src/NetLearningGuide.Message/bin/Debug/netstandard2.0
 /src/NetLearningGuide.UnitTest/obj
 /src/NetLearningGuide.UnitTest/bin/Debug/netcoreapp3.1
+/src/NetLearningGuide.E2ETests/bin/Debug/net5.0
+/src/NetLearningGuide.IntegrationTests/bin/Debug/net5.0
+/src/NetLearningGuide.UnitTest/bin/Debug/net5.0
+/src/TestResults/5c85d5d8-dd68-4a5b-8151-76e08147071f

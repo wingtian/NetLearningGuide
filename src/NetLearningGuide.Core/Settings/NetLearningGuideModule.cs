@@ -26,7 +26,7 @@ namespace NetLearningGuide.Core.Settings
         private static MediatorBuilder MakeMediatorBuilder()
         {
             var mediaBuilder = new MediatorBuilder();
-            mediaBuilder.ConfigureGlobalReceivePipe(config => config.UnifyResponseMiddleware(typeof(CommonResponseResponse<>)))
+            mediaBuilder.ConfigureGlobalReceivePipe(config => config.UnifyResponseMiddleware(typeof(CommonResponse<>)))
                 .RegisterHandlers(typeof(NetLearningGuideModule).Assembly);
             return mediaBuilder;
         }

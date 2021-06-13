@@ -43,8 +43,8 @@ namespace NetLearningGuide.Core.Middlewares
             var businessException = ex as BusinessException;
             var targetType = context.ResultDataType;
             var unifiedTypeInstance = Activator.CreateInstance(targetType) as dynamic;
-            unifiedTypeInstance.Code = businessException?.Code;
-            unifiedTypeInstance.Message = businessException?.Message;
+            unifiedTypeInstance.Code = businessException.Code;
+            unifiedTypeInstance.Message = businessException.Message;
             context.Result = unifiedTypeInstance;
             //TODO: add Serilog
             //Log.Error(JsonConvert.SerializeObject(unifiedTypeInstance));
