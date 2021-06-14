@@ -1,17 +1,17 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using NetLearningGuide.Message.Basic;
-using NetLearningGuide.Message.Commands.Demo;
 using NetLearningGuide.Message.Dtos.Demo;
+using NetLearningGuide.Message.Requests.Demo;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Handlers.CommandHandlers
+namespace NetLearningGuide.Core.Handlers.RequestHandlers.Demo
 {
-    public class DemoBusinessExceptionCommandHandler : ICommandHandler<DemoExceptionCommand, CommonResponse<DemoDto>>
+    public class DemoExceptionRequestHandler : IRequestHandler<DemoExceptionRequest, CommonResponse<DemoDto>>
     {
-        public async Task<CommonResponse<DemoDto>> Handle(IReceiveContext<DemoExceptionCommand> context, CancellationToken cancellationToken)
+        public async Task<CommonResponse<DemoDto>> Handle(IReceiveContext<DemoExceptionRequest> context, CancellationToken cancellationToken)
         {
             await Task.Run(() =>
             {

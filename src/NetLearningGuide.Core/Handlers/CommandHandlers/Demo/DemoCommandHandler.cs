@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Handlers.CommandHandlers
+namespace NetLearningGuide.Core.Handlers.CommandHandlers.Demo
 {
     public class DemoCommandHandler : ICommandHandler<DemoCommand, CommonResponse<DemoDto>>
     {

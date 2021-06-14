@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Handlers.RequestHandlers
+namespace NetLearningGuide.Core.Handlers.RequestHandlers.Demo
 {
     public class DemoRequestHandler : IRequestHandler<DemoRequest, CommonResponse<DemoDto>>
     {

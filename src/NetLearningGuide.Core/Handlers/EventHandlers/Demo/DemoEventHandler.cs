@@ -4,7 +4,7 @@ using NetLearningGuide.Message.Events.Demo;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Handlers.EventHandlers
+namespace NetLearningGuide.Core.Handlers.EventHandlers.Demo
 {
     public class DemoEventHandler : IEventHandler<DemoEvent>
     {

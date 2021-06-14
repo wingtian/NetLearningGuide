@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Handlers.EventHandlers
+namespace NetLearningGuide.Core.Handlers.EventHandlers.Demo
 {
     public class DemoExceptionEventHandler : IEventHandler<DemoExceptionEvent>
     {

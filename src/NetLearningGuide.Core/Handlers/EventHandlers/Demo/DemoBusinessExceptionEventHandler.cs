@@ -1,11 +1,11 @@
-﻿using Mediator.Net.Context;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using NetLearningGuide.Core.Exceptions;
 using NetLearningGuide.Message.Events.Demo;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Handlers.EventHandlers
+namespace NetLearningGuide.Core.Handlers.EventHandlers.Demo
 {
     public class DemoBusinessExceptionEventHandler : IEventHandler<DemoBusinessExceptionEvent>
     {

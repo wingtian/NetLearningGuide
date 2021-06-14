@@ -41,17 +41,14 @@ namespace NetLearningGuide.Core.Settings
                 switch (true)
                 {
                     case bool _ when typeof(IInstancePerLifetimeService).IsAssignableFrom(type):
-                        builder.RegisterType(type).AsImplementedInterfaces().InstancePerLifetimeScope();
+                        builder.RegisterType(type).AsImplementedInterfaces().InstancePerLifetimeScope(); 
                         break;
                     case bool _ when typeof(ISingletonService).IsAssignableFrom(type):
                         builder.RegisterType(type).AsImplementedInterfaces().SingleInstance();
                         break;
-                    case bool _ when typeof(ISwitchWithInstancePerLifetimeService).IsAssignableFrom(type):
-                        builder.RegisterType(type).AsImplementedInterfaces().InstancePerLifetimeScope();
-                        break;
-                    case bool _ when typeof(ISwitchWithSingletonService).IsAssignableFrom(type):
-                        builder.RegisterType(type).AsImplementedInterfaces().SingleInstance();
-                        break;
+                    case bool _ when typeof(IInstancePerDependencyService).IsAssignableFrom(type):
+                        builder.RegisterType(type).AsImplementedInterfaces().InstancePerDependency();
+                        break; 
                     default:
                         builder.RegisterType(type).AsSelf().AsImplementedInterfaces();
                         break;

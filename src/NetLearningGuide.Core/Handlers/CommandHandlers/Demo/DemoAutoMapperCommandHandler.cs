@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using NetLearningGuide.Message.Basic;
 using NetLearningGuide.Message.Commands.Demo;
 using NetLearningGuide.Message.Dtos.Demo;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Handlers.CommandHandlers
+namespace NetLearningGuide.Core.Handlers.CommandHandlers.Demo
 {
     public class DemoAutoMapperCommandHandler : ICommandHandler<DemoMappingCommand, CommonResponse<DemoMappingDto>>
     {
