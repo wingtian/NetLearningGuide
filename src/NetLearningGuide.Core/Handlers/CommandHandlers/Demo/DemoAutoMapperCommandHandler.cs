@@ -23,5 +23,5 @@ namespace NetLearningGuide.Core.Handlers.CommandHandlers.Demo
                 return new CommonResponse<DemoMappingDto>() { Code = 200, Data = _mapper.Map<DemoMappingDto>(context.Message), Message = "OK" };
             }).ConfigureAwait(false);
         }
-    } 
+    }
 }

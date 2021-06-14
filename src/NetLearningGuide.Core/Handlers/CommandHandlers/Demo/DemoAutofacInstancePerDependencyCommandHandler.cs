@@ -17,7 +17,7 @@ namespace NetLearningGuide.Core.Handlers.CommandHandlers.Demo
         }
         public async Task<CommonResponse<string>> Handle(IReceiveContext<DemoAutofacInstancePerDependencyCommand> context, CancellationToken cancellationToken)
         {
-            return new CommonResponse<string>() {Data = (await _service.GetGuid()).ToString(),Code = 200,Message = "OK"};
+            return new CommonResponse<string>() { Data = (await _service.GetGuid().ConfigureAwait(false)).ToString(), Code = 200, Message = "OK" };
         }
-    } 
+    }
 }
