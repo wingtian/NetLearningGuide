@@ -1,2 +1,2 @@
-# Net Learning Guide
-.Net 学习指南
+# Net5 Learning Guide
+.Net5 学习指南
