@@ -31,7 +31,11 @@ namespace NetLearningGuide
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterModule(new NetLearningGuideModule());
+            builder.RegisterModule(new NetLearningGuideModule(new NetLearningGuideModule.DbUpSetting()
+            {
+                ShouldRunDbUp = true,
+                DbUpConnectionString = Configuration.GetConnectionString("Mysql")
+            }));
 
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

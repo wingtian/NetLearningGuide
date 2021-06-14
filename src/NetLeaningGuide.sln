@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetLearningGuide.Integratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetLearningGuide.UnitTest", "NetLearningGuide.UnitTest\NetLearningGuide.UnitTest.csproj", "{A9526D9A-D97B-4739-BE99-2DC086103426}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetLearningGuide.Util", "NetLearningGuide.Util\NetLearningGuide.Util.csproj", "{F1B3CA28-733D-470E-8A99-28FF1D2D1555}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{A9526D9A-D97B-4739-BE99-2DC086103426}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9526D9A-D97B-4739-BE99-2DC086103426}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9526D9A-D97B-4739-BE99-2DC086103426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1B3CA28-733D-470E-8A99-28FF1D2D1555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B3CA28-733D-470E-8A99-28FF1D2D1555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B3CA28-733D-470E-8A99-28FF1D2D1555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B3CA28-733D-470E-8A99-28FF1D2D1555}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{28B7AC66-5AC6-4FA0-85D4-6896D19089A9} = {400C88E2-0FB9-4D1A-A0B2-21DB36718743}
 		{67297176-A2D6-48F1-B3E3-4104BC8CDF2C} = {400C88E2-0FB9-4D1A-A0B2-21DB36718743}
 		{A9526D9A-D97B-4739-BE99-2DC086103426} = {400C88E2-0FB9-4D1A-A0B2-21DB36718743}
+		{F1B3CA28-733D-470E-8A99-28FF1D2D1555} = {4A6A618A-479E-414E-BAC6-8AC4F643A563}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {042F203B-57B4-4FFC-B39F-00BF6CE041B4}

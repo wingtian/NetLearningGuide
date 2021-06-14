@@ -4,6 +4,8 @@ using Autofac;
 using AutoMapper;
 using Mediator.Net;
 using Mediator.Net.Autofac;
+using Microsoft.EntityFrameworkCore;
+using NetLearningGuide.Core.EFCore;
 using NetLearningGuide.Core.Middlewares;
 using NetLearningGuide.Core.Services;
 using NetLearningGuide.Core.Services.ServiceLifetime;
@@ -15,11 +17,18 @@ namespace NetLearningGuide.Core.Settings
 {
     public class NetLearningGuideModule : Module
     {
+        private readonly DbUpSetting _dbUpSetting;
+
+        public NetLearningGuideModule(DbUpSetting dbUpSetting)
+        {
+            _dbUpSetting = dbUpSetting;
+        }
         protected override void Load(ContainerBuilder builder)
         {
             RegisterMediator(builder);
             RegisterServices(builder);
             RegisterAutoMapper(builder);
+            RegisterDatabase(builder);
         }
 
         private void RegisterMediator(ContainerBuilder builder)
@@ -72,6 +81,20 @@ namespace NetLearningGuide.Core.Settings
                 })
                 .As<IMapper>()
                 .InstancePerLifetimeScope();
+        }
+        public class DbUpSetting
+        {
+            public bool ShouldRunDbUp { get; set; }
+            public string DbUpConnectionString { get; set; }
+        }
+        private void RegisterDatabase(ContainerBuilder builder)
+        {
+            if (_dbUpSetting == null)
+                return;
+            builder.RegisterInstance(new MySqlConnectionString(_dbUpSetting.DbUpConnectionString));
+            builder.RegisterType<DbNetContext>()
+                .AsSelf().As<DbContext>()
+                .AsImplementedInterfaces().InstancePerLifetimeScope();
         }
     }
 }

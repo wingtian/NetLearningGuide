@@ -12,7 +12,7 @@ namespace NetLearningGuide.UnitTest.Demo
         protected DemoBase()
         {
             Builder = new ContainerBuilder();
-            Builder.RegisterModule(new NetLearningGuideModule());
+            Builder.RegisterModule(new NetLearningGuideModule(null));
             _container = Builder.Build();
         }
         protected async Task Run<T>(Func<T, Task> action, Action<ContainerBuilder> extraRegistration = null)
