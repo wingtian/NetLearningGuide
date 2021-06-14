@@ -1,12 +1,14 @@
 ﻿using System.Linq;
 using System.Reflection;
 using Autofac;
+using AutoMapper;
 using Mediator.Net;
 using Mediator.Net.Autofac;
 using NetLearningGuide.Core.Middlewares;
 using NetLearningGuide.Core.Services;
 using NetLearningGuide.Core.Services.ServiceLifetime;
 using NetLearningGuide.Message.Basic;
+using NetLearningGuide.Message.Mappings;
 using Module = Autofac.Module;
 
 namespace NetLearningGuide.Core.Settings
@@ -17,6 +19,7 @@ namespace NetLearningGuide.Core.Settings
         {
             RegisterMediator(builder);
             RegisterServices(builder);
+            RegisterAutoMapper(builder);
         }
 
         private void RegisterMediator(ContainerBuilder builder)
@@ -54,6 +57,24 @@ namespace NetLearningGuide.Core.Settings
                         break;
                 }
             }
+        }
+        private void RegisterAutoMapper(ContainerBuilder builder)
+        {
+            builder.Register(context => new MapperConfiguration(cfg =>
+                {
+                    cfg.AddMaps(typeof(NetProfile).GetTypeInfo().Assembly.GetTypes());
+                }))
+                .AsSelf()
+                .SingleInstance();
+
+            builder.Register(c =>
+                {
+                    var context = c.Resolve<IComponentContext>();
+                    var config = context.Resolve<MapperConfiguration>();
+                    return config.CreateMapper(context.Resolve);
+                })
+                .As<IMapper>()
+                .InstancePerLifetimeScope();
         }
     }
 }
