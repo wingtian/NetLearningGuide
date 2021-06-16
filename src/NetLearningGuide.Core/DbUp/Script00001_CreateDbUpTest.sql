@@ -1,0 +1,5 @@
+﻿CREATE TABLE `test_dbup` (
+    `GUID` VARCHAR(36) NOT NULL,
+    `DescInfo` VARCHAR(45) NULL,
+PRIMARY KEY (`GUID`))
+COMMENT = 'DbUp測試表';

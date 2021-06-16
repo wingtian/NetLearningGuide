@@ -1,16 +1,18 @@
-﻿using System.Linq;
-using System.Reflection;
-using Autofac;
+﻿using Autofac;
 using AutoMapper;
 using Mediator.Net;
 using Mediator.Net.Autofac;
 using Microsoft.EntityFrameworkCore;
+using NetLearningGuide.Core.ConfigurationSetting;
+using NetLearningGuide.Core.DbUp.Tool;
 using NetLearningGuide.Core.EFCore;
 using NetLearningGuide.Core.Middlewares;
 using NetLearningGuide.Core.Services;
 using NetLearningGuide.Core.Services.ServiceLifetime;
 using NetLearningGuide.Message.Basic;
 using NetLearningGuide.Message.Mappings;
+using System.Linq;
+using System.Reflection;
 using Module = Autofac.Module;
 
 namespace NetLearningGuide.Core.Settings
@@ -25,12 +27,28 @@ namespace NetLearningGuide.Core.Settings
         }
         protected override void Load(ContainerBuilder builder)
         {
+            RegisterSettings(builder);
             RegisterMediator(builder);
             RegisterServices(builder);
             RegisterAutoMapper(builder);
             RegisterDatabase(builder);
+            RegisterDbUp(builder);
         }
-
+        private void RegisterDbUp(ContainerBuilder builder)
+        {
+            if (_dbUpSetting == null)
+                return;
+            if (_dbUpSetting.ShouldRunDbUp)
+            {
+                builder.RegisterInstance(new DbUpSetUpMysql(_dbUpSetting.DbUpConnectionString));
+            }
+        }
+        private void RegisterSettings(ContainerBuilder builder)
+        {
+            builder.RegisterTypes(typeof(NetLearningGuideModule).Assembly.GetTypes()
+                    .Where(x => x.IsClass && typeof(IConfigurationSetting).IsAssignableFrom(x)).ToArray()).AsSelf()
+                .SingleInstance();
+        }
         private void RegisterMediator(ContainerBuilder builder)
         {
             builder.RegisterMediator(MakeMediatorBuilder());
@@ -50,14 +68,14 @@ namespace NetLearningGuide.Core.Settings
                 switch (true)
                 {
                     case bool _ when typeof(IInstancePerLifetimeService).IsAssignableFrom(type):
-                        builder.RegisterType(type).AsImplementedInterfaces().InstancePerLifetimeScope(); 
+                        builder.RegisterType(type).AsImplementedInterfaces().InstancePerLifetimeScope();
                         break;
                     case bool _ when typeof(ISingletonService).IsAssignableFrom(type):
                         builder.RegisterType(type).AsImplementedInterfaces().SingleInstance();
                         break;
                     case bool _ when typeof(IInstancePerDependencyService).IsAssignableFrom(type):
                         builder.RegisterType(type).AsImplementedInterfaces().InstancePerDependency();
-                        break; 
+                        break;
                     default:
                         builder.RegisterType(type).AsSelf().AsImplementedInterfaces();
                         break;
