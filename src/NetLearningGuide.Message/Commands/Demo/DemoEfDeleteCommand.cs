@@ -3,9 +3,9 @@ using System;
 
 namespace NetLearningGuide.Message.Commands.Demo
 {
-    public class DemoEfInsertCommand : ICommand
+    public class DemoEfDeleteCommand : ICommand
     {
-        public DemoEfInsertCommand(Guid id)
+        public DemoEfDeleteCommand(Guid id)
         {
             Id = id;
         }

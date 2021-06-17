@@ -9,7 +9,7 @@ namespace NetLearningGuide.Core.Domain.Demo
     public class TestDbUp : IEntity
     {
         [Key, Column("GUID", TypeName = "char(36)")]
-        public Guid GUID { get; set; }
+        public Guid Guid { get; set; }
         [Column("DescInfo", TypeName = "char(45)")]
         public string DescInfo { get; set; }
     }
