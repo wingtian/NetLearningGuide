@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.Linq;
+using System.Reflection;
+using Autofac;
 using AutoMapper;
 using Mediator.Net;
 using Mediator.Net.Autofac;
@@ -9,15 +11,13 @@ using NetLearningGuide.Core.EFCore;
 using NetLearningGuide.Core.Middlewares;
 using NetLearningGuide.Core.Services;
 using NetLearningGuide.Core.Services.ServiceLifetime;
+using NetLearningGuide.Core.Settings;
 using NetLearningGuide.Message.Basic;
 using NetLearningGuide.Message.Mappings;
-using System.Linq;
-using System.Reflection;
-using Module = Autofac.Module;
 
-namespace NetLearningGuide.Core.Settings
+namespace NetLearningGuide.Core.Module
 {
-    public class NetLearningGuideModule : Module
+    public class NetLearningGuideModule : Autofac.Module
     {
         private readonly DbUpSetting _dbUpSetting;
 

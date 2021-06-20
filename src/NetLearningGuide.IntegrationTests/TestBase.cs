@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using NetLearningGuide.Core.Settings;
+using Microsoft.Extensions.Configuration;
+using NetLearningGuide.Core.Module;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
 namespace NetLearningGuide.IntegrationTests
 {

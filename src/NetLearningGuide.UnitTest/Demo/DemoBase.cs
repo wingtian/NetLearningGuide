@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using NetLearningGuide.Core.Module;
+using System;
 using System.Threading.Tasks;
-using Autofac;
-using NetLearningGuide.Core.Settings;
 
 namespace NetLearningGuide.UnitTest.Demo
 {
