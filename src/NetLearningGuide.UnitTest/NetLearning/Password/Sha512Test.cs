@@ -7,10 +7,10 @@ using Xunit;
 
 namespace NetLearningGuide.UnitTest.NetLearning.Password
 {
-    public class Md5Test
+    public class Sha512Test
     {
         [Fact]
-        public Task Md5UnitTest()
+        public Task Sha512UnitTest()
         {
             var userPassword = "ABCD";
             var inputPassword = "ABCD";
@@ -24,7 +24,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.Password
         private bool Decryption(string input, byte salt, Guid password)
         {
             var arr = password.ToByteArray();
-            MD5 provider = MD5.Create();
+            SHA512 provider = SHA512.Create();
             input += salt;
             input += salt;
             var bytes = Encoding.UTF8.GetBytes(input);
@@ -41,12 +41,17 @@ namespace NetLearningGuide.UnitTest.NetLearning.Password
 
         private Guid Encryption(string input, byte salt)
         {
-            MD5 provider = MD5.Create();
+            SHA512 provider = SHA512.Create();
             input += salt;
             input += salt;
             var bytes = Encoding.UTF8.GetBytes(input);
             var hash = provider.ComputeHash(bytes);
-            return new Guid(hash);
+            var finalByte = new byte[16];
+            for (int i = 1; i < 16; i++)
+            {
+                finalByte[i] = hash[i];
+            }
+            return new Guid(finalByte);
         }
     }
 }
