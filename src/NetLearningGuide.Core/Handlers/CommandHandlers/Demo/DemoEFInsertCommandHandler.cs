@@ -18,7 +18,7 @@ namespace NetLearningGuide.Core.Handlers.CommandHandlers.Demo
         }
         public async Task<CommonResponse<bool>> Handle(IReceiveContext<DemoEfInsertCommand> context, CancellationToken cancellationToken)
         {
-            return new CommonResponse<bool>() { Code = 200, Data = await _service.InsertTest(context.Message.Id, cancellationToken).ConfigureAwait(false), Message = "OK" };
+            return new CommonResponse<bool>() { Code = 200, Data = await _service.InsertTest(context.Message, cancellationToken).ConfigureAwait(false), Message = "OK" };
         }
     }
 }

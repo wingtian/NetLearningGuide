@@ -17,7 +17,7 @@ namespace NetLearningGuide.IntegrationTests.Demo
         {
             var guid = Guid.NewGuid();
             var deleteCommand = new DemoEfDeleteCommand(guid);
-            var insertCommand = new DemoEfInsertCommand(guid);
+            var insertCommand = new DemoEfInsertCommand(guid) { Description = "添加測試" };
             var updateCommand = new DemoEfUpdateCommand(guid);
             var queryRequest = new DemoEfQueryRequest(guid);
             await Run<IMediator>(async mediator =>

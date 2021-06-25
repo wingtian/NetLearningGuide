@@ -12,6 +12,7 @@ using NetLearningGuide.Core.Middlewares;
 using NetLearningGuide.Core.Services;
 using NetLearningGuide.Core.Services.ServiceLifetime;
 using NetLearningGuide.Core.Settings;
+using NetLearningGuide.Core.Validators;
 using NetLearningGuide.Message.Basic;
 using NetLearningGuide.Message.Mappings;
 
@@ -33,6 +34,7 @@ namespace NetLearningGuide.Core.Module
             RegisterAutoMapper(builder);
             RegisterDatabase(builder);
             RegisterDbUp(builder);
+            RegisterValidator(builder);
         }
         private void RegisterDbUp(ContainerBuilder builder)
         {
@@ -113,6 +115,17 @@ namespace NetLearningGuide.Core.Module
             builder.RegisterType<DbNetContext>()
                 .AsSelf().As<DbContext>()
                 .AsImplementedInterfaces().InstancePerLifetimeScope();
+        }
+        private void RegisterValidator(ContainerBuilder builder)
+        {
+            builder.RegisterTypes(typeof(NetLearningGuideModule).Assembly.GetTypes()
+                    .Where(x => x.IsClass && typeof(IEntityFluentValidator).IsAssignableFrom(x)).ToArray()).AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.RegisterTypes(typeof(NetLearningGuideModule).Assembly.GetTypes()
+                    .Where(x => x.IsClass && typeof(IEntityBusinessLogicValidator).IsAssignableFrom(x)).ToArray())
+                .AsSelf()
+                .AsImplementedInterfaces();
         }
     }
 }

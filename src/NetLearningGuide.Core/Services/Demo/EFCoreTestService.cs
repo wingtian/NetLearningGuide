@@ -4,6 +4,7 @@ using NetLearningGuide.Core.EFCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using NetLearningGuide.Message.Commands.Demo;
 
 namespace NetLearningGuide.Core.Services.Demo
 {
@@ -14,9 +15,9 @@ namespace NetLearningGuide.Core.Services.Demo
         {
             _dbContext = context;
         }
-        public async Task<bool> InsertTest(Guid guid, CancellationToken cancellationToken)
+        public async Task<bool> InsertTest(DemoEfInsertCommand model, CancellationToken cancellationToken)
         {
-            await _dbContext.Set<TestDbUp>().AddAsync(new TestDbUp { Guid = guid, DescInfo = "添加測試" }, cancellationToken).ConfigureAwait(false);
+            await _dbContext.Set<TestDbUp>().AddAsync(new TestDbUp { Guid = model.Id, DescInfo = model.Description }, cancellationToken).ConfigureAwait(false);
             return await _dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false) > 0;
         }
         public async Task<bool> UpdateTest(Guid guid, CancellationToken cancellationToken)

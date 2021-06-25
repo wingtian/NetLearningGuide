@@ -11,5 +11,7 @@ namespace NetLearningGuide.Message.Commands.Demo
         }
 
         public Guid Id { get; set; }
+
+        public string Description { get; set; }
     }
 }
