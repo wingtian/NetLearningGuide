@@ -10,18 +10,22 @@ using NetLearningGuide.Core.Validators;
 
 namespace NetLearningGuide.Core.EFCore
 {
-    public class DbNetContext : DbContext
+    public partial class DbNetContext : DbContext
     {
         private readonly MySqlConnectionString _connectionString;
         private readonly IEnumerable<IEntityFluentValidator> _entityFluentValidators;
         private readonly Func<IEnumerable<IEntityBusinessLogicValidator>> _entityBusinessLogicValidators;
+        private readonly Func<IEntityValidationContext> _entityBusinessLogicValidationContextProvider;
         public DbNetContext(MySqlConnectionString connectionString,
             IEnumerable<IEntityFluentValidator> entityFluentValidators,
-            Func<IEnumerable<IEntityBusinessLogicValidator>> entityBusinessLogicValidators)
+            Func<IEnumerable<IEntityBusinessLogicValidator>> entityBusinessLogicValidators,
+            Func<IEntityValidationContext> entityBusinessLogicValidationContextProvider
+            )
         {
             _connectionString = connectionString;
             _entityFluentValidators = entityFluentValidators;
             _entityBusinessLogicValidators = entityBusinessLogicValidators;
+            _entityBusinessLogicValidationContextProvider = entityBusinessLogicValidationContextProvider;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
