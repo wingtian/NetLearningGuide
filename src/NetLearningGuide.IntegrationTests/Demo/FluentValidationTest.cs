@@ -23,8 +23,8 @@ namespace NetLearningGuide.IntegrationTests.Demo
                 };
                 await Run<IEntityFluentValidator, DbNetContext>(async (validator, dbContext) =>
                 {
-                    await dbContext.Set<TestDbUp>().AddAsync(test, default).ConfigureAwait(false);
-                    await dbContext.SaveChangesAsync(default);
+                    await dbContext.Set<TestDbUp>().AddAsync(test).ConfigureAwait(false);
+                    await dbContext.SaveChangesAsync().ConfigureAwait(false);
                 });
             }
             catch (Exception e)
@@ -41,25 +41,24 @@ namespace NetLearningGuide.IntegrationTests.Demo
                 Guid = Guid.NewGuid(),
                 DescInfo = "a"
             };
-            var checkItem = new TestDbUp(); ;
+            var checkItem = new TestDbUp(); 
             await Run<IEntityFluentValidator, DbNetContext>(async (validator, dbContext) =>
             {
                 try
                 {
-                    await dbContext.Set<TestDbUp>().AddAsync(test, default).ConfigureAwait(false);
-                    await dbContext.SaveChangesAsync(default);
-                    checkItem = await dbContext.Set<TestDbUp>().FirstOrDefaultAsync(x => x.Guid == test.Guid, default).ConfigureAwait(false);
+                    await dbContext.Set<TestDbUp>().AddAsync(test).ConfigureAwait(false);
+                    await dbContext.SaveChangesAsync();
+                    checkItem = await dbContext.Set<TestDbUp>().FirstOrDefaultAsync(x => x.Guid == test.Guid).ConfigureAwait(false);
                     checkItem.DescInfo = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-                    await dbContext.SaveChangesAsync(default);
+                    await dbContext.SaveChangesAsync().ConfigureAwait(false);
                 }
                 catch (Exception e)
                 {
                     dbContext.Set<TestDbUp>().Remove(checkItem);
-                    await dbContext.SaveChangesAsync(default);
+                    await dbContext.SaveChangesAsync().ConfigureAwait(false);
                     e.Message.ShouldContain("描述长度在1到45之间!");
                 }
-            });
-
+            }); 
         }
     }
 }
