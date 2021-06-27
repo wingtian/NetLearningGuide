@@ -1,7 +1,7 @@
-﻿using NetLearningGuide.Core.Settings;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using NetLearningGuide.Core.Settings;
 
-namespace NetLearningGuide.Core.Services.Demo
+namespace NetLearningGuide.Core.Services.Demo.Configuration
 {
     public class ConfigurationService : IConfigurationService
     {

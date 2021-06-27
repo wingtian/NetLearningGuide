@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NetLearningGuide.Core.Domain.Demo;
-using NetLearningGuide.Core.EFCore;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using NetLearningGuide.Core.Domain.Demo;
+using NetLearningGuide.Core.EFCore;
 using NetLearningGuide.Message.Commands.Demo;
 
-namespace NetLearningGuide.Core.Services.Demo
+namespace NetLearningGuide.Core.Services.Demo.EfCore
 {
     public class EfCoreTestService : IEfCoreTestService
     {

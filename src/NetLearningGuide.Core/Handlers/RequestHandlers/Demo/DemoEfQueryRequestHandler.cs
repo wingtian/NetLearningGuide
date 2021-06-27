@@ -1,11 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Mediator.Net.Context;
+﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using NetLearningGuide.Core.Domain.Demo;
-using NetLearningGuide.Core.Services.Demo;
+using NetLearningGuide.Core.Services.Demo.EfCore;
 using NetLearningGuide.Message.Basic;
 using NetLearningGuide.Message.Requests.Demo;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NetLearningGuide.Core.Handlers.RequestHandlers.Demo
 {

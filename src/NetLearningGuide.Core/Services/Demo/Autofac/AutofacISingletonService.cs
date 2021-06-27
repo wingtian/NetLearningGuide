@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Services.Demo
+namespace NetLearningGuide.Core.Services.Demo.Autofac
 {
-    public class AutofacInstancePerDependencyService : IAutofacInstancePerDependencyService
+    public class AutofacISingletonService : IAutofacISingletonService
     {
         private Guid id;
 
-        public AutofacInstancePerDependencyService()
+        public AutofacISingletonService()
         {
             id = Guid.NewGuid();
         }

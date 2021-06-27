@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using NetLearningGuide.Message.Commands.Demo;
 using NetLearningGuide.Message.Dtos.Demo;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Services.Demo
+namespace NetLearningGuide.Core.Services.Demo.AutoMapper
 {
     public class DemoAutoMapperService : IDemoAutoMapperService
     {

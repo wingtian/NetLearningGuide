@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace NetLearningGuide.Core.Services.Demo
+namespace NetLearningGuide.Core.Services.Demo.Autofac
 {
     public class AutofacInstancePerLifetimeService : IAutofacInstancePerLifetimeService
     {

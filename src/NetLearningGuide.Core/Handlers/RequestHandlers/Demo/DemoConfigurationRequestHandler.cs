@@ -1,6 +1,6 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using NetLearningGuide.Core.Services.Demo;
+using NetLearningGuide.Core.Services.Demo.Configuration;
 using NetLearningGuide.Message.Basic;
 using NetLearningGuide.Message.Requests.Demo;
 using System.Threading;
