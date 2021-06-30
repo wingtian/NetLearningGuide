@@ -20,15 +20,15 @@ namespace NetLearningGuide.Core.EFCore
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            await OnBeforeSaveAsync(true);
-            return await base.SaveChangesAsync(cancellationToken);
+            await OnBeforeSaveAsync(true).ConfigureAwait(false);
+            return await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
         private async Task OnBeforeSaveAsync(bool shouldValidate)
         {
             foreach (var entityEntry in ChangeTracker.Entries())
             {
-                await ValidateEntity(entityEntry, shouldValidate);
+                await ValidateEntity(entityEntry, shouldValidate).ConfigureAwait(false);
             }
         }
 
@@ -52,7 +52,7 @@ namespace NetLearningGuide.Core.EFCore
                 {
                     if (entityBusinessLogicValidator.EntityType == entityEntry.Entity.GetType())
                     {
-                        await entityBusinessLogicValidator.BeginValidation(entityEntry, validationContext);
+                        await entityBusinessLogicValidator.BeginValidation(entityEntry, validationContext).ConfigureAwait(false);
                     }
                 }
             }
