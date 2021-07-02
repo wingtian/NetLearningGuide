@@ -1,10 +1,10 @@
-﻿using Shouldly;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Shouldly;
 using Xunit;
 
-namespace NetLearningGuide.UnitTest.NetLearning
+namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
 {
     public class ListStringTest
     {
