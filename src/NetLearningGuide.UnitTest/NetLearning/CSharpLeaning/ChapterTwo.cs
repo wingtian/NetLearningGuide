@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using Shouldly;
 using System.Threading.Tasks;
 using Xunit;
@@ -79,6 +80,60 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
             text = $"{number:R}";                     //1.618033988749895
             result = double.Parse(text);              //1.6180339887498949
             result.ShouldBe(number);
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task CheckedCase1()
+        {
+            int n = int.MaxValue;
+            n += 1;
+            n.ShouldBe(-2147483648);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task CheckedCase2()
+        {
+            try
+            {
+                checked
+                {
+                    int n = int.MaxValue;
+                    n += 1;
+                }
+            }
+            catch (Exception e)
+            {
+                e.Message.ShouldBe("Arithmetic operation resulted in an overflow.");
+            }
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task UnCheckedCase1()
+        {
+            unchecked
+            {
+                int n = int.MaxValue;
+                n += 1;
+                n.ShouldBe(-2147483648);
+            }
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task TryParseCase1()
+        {
+            string input = "tts";
+            double number;
+            double.TryParse(input,out number).ShouldBeFalse();
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task TryParseCase2()
+        {
+            string input = "111";
+            double number;
+            double.TryParse(input, out number).ShouldBeTrue(); 
             return Task.CompletedTask;
         }
     }
