@@ -56,10 +56,10 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
             (decimalNumber != (decimal)doubleNumber1).ShouldBeTrue();
             (Math.Abs((double)decimalNumber - doubleNumber1) > 0).ShouldBeTrue(); //差值不为0
             (Math.Abs((float)decimalNumber - floatNumber) > 0).ShouldBeTrue();//差值不为0
-            (Math.Abs(doubleNumber1 - (double)floatNumber) < 1).ShouldBeTrue();// 差值为0
+            (Math.Abs(doubleNumber1 - floatNumber) < 1).ShouldBeTrue();// 差值为0
             (Math.Abs(doubleNumber1 - doubleNumber2) > 0).ShouldBeTrue();//差值不为0
             (Math.Abs(floatNumber - doubleNumber2) > 0).ShouldBeTrue();//差值不为0
-            (Math.Abs((double)4.2F - 4.2D) > 0).ShouldBeTrue();//差值不为0
+            (Math.Abs(4.2F - 4.2D) > 0).ShouldBeTrue();//差值不为0
             (Math.Abs(4.2F - 4.2D) > 0).ShouldBeTrue();//差值不为0
             return Task.CompletedTask;
         }
