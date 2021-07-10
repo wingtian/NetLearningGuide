@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using System;
+using Shouldly;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -77,7 +78,42 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
             public string FirstName { get; }
             public string LastName { get; }
             public string FullName => $"{FirstName}.{LastName}";
-        } 
+        }
+
+        [Fact]
+        public Task AtributeTestCase2()
+        {
+            var person = new PersonName();
+            person.Name = "Vinson T";
+            person.LastName.ShouldBe("T");
+            person.FirstName.ShouldBe("Vinson");
+            person.FirstName = "Fax";
+            person.Name.ShouldBe("Fax T");
+            return Task.CompletedTask;
+        }
+        private class PersonName
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Name
+            {
+                get { return $"{FirstName} {LastName}"; }
+                set
+                {
+                    string[] names;
+                    names = value.Split(new char[] { ' ' });
+                    if (names.Length == 2)
+                    {
+                        FirstName = names[0];
+                        LastName = names[1];
+                    }
+                    else
+                    {
+                        throw new ArgumentException($"Assigned vale '{value}' is invalid", "value");
+                    }
+                }
+            }
+        }
         #endregion
     }
 }
