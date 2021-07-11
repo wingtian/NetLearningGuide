@@ -101,7 +101,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
                 set
                 {
                     string[] names;
-                    names = value.Split(new char[] { ' ' });
+                    names = value.Split(new[] { ' ' });
                     if (names.Length == 2)
                     {
                         FirstName = names[0];
