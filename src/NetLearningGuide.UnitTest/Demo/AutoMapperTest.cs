@@ -6,6 +6,7 @@ using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Xunit;
 
 namespace NetLearningGuide.UnitTest.Demo
@@ -43,6 +44,23 @@ namespace NetLearningGuide.UnitTest.Demo
                 result.Data.Relation.ShouldBe(command.Relations);
                 result.Data.Comment.ShouldBeNull();
             });
+        }
+
+        [Fact]
+        public Task AutoMapperFunctionalTest()
+        {
+            var command = new DemoMappingServiceCommand() { UserName = "Cay", Age = 18, Birthday = Convert.ToDateTime("2021-06-01"), Relations = new List<string>() { "ABC", "BCD" } };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DemoMappingServiceCommand, DemoMappingDto>()
+                .ForMember(dest => dest.UserAge, opt => opt.MapFrom(src => src.Age))
+                .ForMember(dest => dest.UserBirthday, opt => opt.MapFrom(src => src.Birthday))
+                .ForMember(dest => dest.Relation, opt => opt.MapFrom(src => src.Relations))).CreateMapper();
+            var result = mapper.Map<DemoMappingDto>(command);
+            result.UserName.ShouldBe(command.UserName);
+            result.UserAge.ShouldBe(command.Age);
+            result.UserBirthday.ShouldBe(command.Birthday);
+            result.Relation.ShouldBe(command.Relations);
+            result.Comment.ShouldBeNull();
+            return Task.CompletedTask;
         }
     }
 }

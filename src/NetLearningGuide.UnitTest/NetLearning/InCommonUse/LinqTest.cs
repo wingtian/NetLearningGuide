@@ -115,7 +115,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             };
 
             var temp = (from li in list
-                        join ex in listExtend on new {li?.Name, Age = li == null ? 0 : li.Age } equals new {ex.Name, ex.Age } into tem
+                        join ex in listExtend on new {li?.Name, Age = li?.Age ?? 0 } equals new {ex.Name, ex.Age } into tem
                         from main in tem.DefaultIfEmpty()
                         select new LinqModelFinal()
                         {
