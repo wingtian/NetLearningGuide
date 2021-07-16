@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using NetLearningGuide.Core.Domain.Demo;
@@ -13,5 +14,7 @@ namespace NetLearningGuide.Core.Services.Demo.EfCore
         Task<bool> UpdateTest(Guid guid, CancellationToken cancellationToken);
         Task<TestDbUp> GetTest(Guid guid, CancellationToken cancellationToken);
         Task<bool> DeleteTest(Guid guid, CancellationToken cancellationToken);
+        Task<List<TestDbUp>> GetAllTest(CancellationToken cancellationToken);
+        Task<List<TestDbUp>> GetAllTestNoCache(CancellationToken cancellationToken);
     }
 }

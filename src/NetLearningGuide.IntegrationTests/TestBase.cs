@@ -4,6 +4,7 @@ using NetLearningGuide.Core.Module;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace NetLearningGuide.IntegrationTests
 {
@@ -25,6 +26,7 @@ namespace NetLearningGuide.IntegrationTests
                     .AddJsonFile("appsettings.json")
                     .Build();
                 Builder.RegisterInstance(Configuration).As<IConfiguration>();
+                Builder.Register(c => new MemoryCache(new MemoryCacheOptions())).As<IMemoryCache>().SingleInstance();
                 Builder.RegisterModule(new NetLearningGuideModule(new NetLearningGuideModule.DbUpSetting()
                 {
                     DbUpConnectionString = Configuration.GetConnectionString("Mysql"),
