@@ -1,10 +1,13 @@
 using Autofac;
+using Hangfire;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NetLearningGuide.Core.HangFireJob;
 using NetLearningGuide.Core.Module;
 
 namespace NetLearningGuide
@@ -27,6 +30,8 @@ namespace NetLearningGuide
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetLearningGuide", Version = "v1" });
             });
+            services.AddHangfire(config => config.UseMemoryStorage());
+            services.AddHangfireServer();  //Add the processing server as IHostedService
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -58,6 +63,7 @@ namespace NetLearningGuide
             {
                 endpoints.MapControllers();
             });
+            HangFireJob.ExecuteRecurringJob();
         }
     }
 }

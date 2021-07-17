@@ -12,7 +12,7 @@ namespace NetLearningGuide.IntegrationTests
     {
         protected IConfiguration Configuration;
         private ILifetimeScope _container;
-        private ContainerBuilder Builder { get; set; } 
+        protected ContainerBuilder Builder { get; set; } 
         private static object _baseLock = new object();
         private static bool _isRunDbUp = true;
 

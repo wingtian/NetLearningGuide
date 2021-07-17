@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.0" />
     <PackageReference Include="Mediator.Net" Version="4.0.0" />
     <PackageReference Include="Mediator.Net.Autofac" Version="4.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
