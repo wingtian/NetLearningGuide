@@ -12,7 +12,7 @@ namespace NetLearningGuide.IntegrationTests
     {
         protected IConfiguration Configuration;
         private ILifetimeScope _container;
-        protected ContainerBuilder Builder { get; set; } 
+        protected ContainerBuilder TestBuilder { get; set; } 
         private static object _baseLock = new object();
         private static bool _isRunDbUp = true;
 
@@ -20,20 +20,20 @@ namespace NetLearningGuide.IntegrationTests
         {
             lock (_baseLock)
             {
-                Builder = new ContainerBuilder();
+                TestBuilder = new ContainerBuilder();
                 Configuration = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
                     .Build();
-                Builder.RegisterInstance(Configuration).As<IConfiguration>();
-                Builder.Register(c => new MemoryCache(new MemoryCacheOptions())).As<IMemoryCache>().SingleInstance();
-                Builder.RegisterModule(new NetLearningGuideModule(new NetLearningGuideModule.DbUpSetting()
+                TestBuilder.RegisterInstance(Configuration).As<IConfiguration>();
+                TestBuilder.Register(c => new MemoryCache(new MemoryCacheOptions())).As<IMemoryCache>().SingleInstance();
+                TestBuilder.RegisterModule(new NetLearningGuideModule(new NetLearningGuideModule.DbUpSetting()
                 {
                     DbUpConnectionString = Configuration.GetConnectionString("Mysql"),
                     ShouldRunDbUp = _isRunDbUp,
                 }));
                 _isRunDbUp = false;
-                _container = Builder.Build();
+                _container = TestBuilder.Build();
             }
         }
         protected void Run<T>(Action<T> action, Action<ContainerBuilder> extraRegistration = null)
