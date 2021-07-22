@@ -102,10 +102,8 @@ namespace NetLearningGuide.IntegrationTests.Demo
                 }
             }
         }
-        #endregion
-        //TODO :WIP
-        #region cnblogs by mysql
-
+        #endregion 
+        #region cnblogs by mysql 
         [Fact]
         public async Task CnBlogspiderTest()
         {
@@ -126,12 +124,12 @@ namespace NetLearningGuide.IntegrationTests.Demo
             builder.UseDownloader<HttpClientDownloader>();
             builder.UseSerilog();
             builder.IgnoreServerCertificateError();
+            //builder.UseQueueDistinctBfsScheduler<HashSetDuplicateRemover>();
             builder.UseMySqlQueueBfsScheduler(x =>
             {
                 x.ConnectionString = Configuration.GetValue<string>("ConnectionStrings:Mysql");
             });
             await builder.Build().RunAsync();
-            Environment.Exit(0);
         }
         public class EntitySpider : Spider
         {
@@ -155,7 +153,43 @@ namespace NetLearningGuide.IntegrationTests.Demo
                 return new(ObjectId.CreateId().ToString(), "博客园");
             }
 
-            [Schema("cnblogs", "news")]
+            //class Parser : DataParser
+            //{
+            //    public override Task InitializeAsync()
+            //    {
+            //        return Task.CompletedTask;
+            //    }
+
+            //    protected override Task ParseAsync(DataFlowContext context)
+            //    {
+            //        var selectable = context.Selectable;
+            //        // 解析数据 
+            //        var test = selectable.XPath("类别")
+            //            ?.Value;
+            //        var test1 = selectable.XPath("网站")
+            //            ?.Value;
+            //        var test2 = selectable.XPath("Title")
+            //            ?.Value;
+            //        var test3 = selectable.XPath("GUID")
+            //            ?.Value;
+            //        var test4 = selectable.XPath(".//h2[@class='news_entry']/a")
+            //            ?.Value;
+            //        var test5 = selectable.XPath(".//h2[@class='news_entry']/a/@href")
+            //            ?.Value;
+            //        var test6 = selectable.XPath(".//div[@class='entry_summary']")
+            //            ?.Value;
+            //        var test7 = selectable.XPath(".//span[@class='view']")
+            //            ?.Value;
+            //        var test8 = selectable.XPath(".//span[@class='tag']")
+            //            ?.Value;
+            //        var test9 = selectable.XPath("//*[@id="entry_698715"]/div[2]/div[1]/text()")
+            //            ?.Value;
+
+            //        return Task.CompletedTask;
+            //    }
+            //}
+
+            [Schema("db_net_leaning", "cnblogs")]
             [EntitySelector(Expression = ".//div[@class='news_block']", Type = SelectorType.XPath)]
             [GlobalValueSelector(Expression = ".//a[@class='current']", Name = "类别", Type = SelectorType.XPath)]
             [GlobalValueSelector(Expression = "//title", Name = "Title", Type = SelectorType.XPath)]
