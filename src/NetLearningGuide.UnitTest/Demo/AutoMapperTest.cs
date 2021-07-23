@@ -5,6 +5,7 @@ using NetLearningGuide.Message.Dtos.Demo;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Xunit;
@@ -47,7 +48,7 @@ namespace NetLearningGuide.UnitTest.Demo
         }
 
         [Fact]
-        public Task AutoMapperFunctionalTest()
+        public Task AutoMapperFunctionalTestCase1()
         {
             var command = new DemoMappingServiceCommand() { UserName = "Cay", Age = 18, Birthday = Convert.ToDateTime("2021-06-01"), Relations = new List<string>() { "ABC", "BCD" } };
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DemoMappingServiceCommand, DemoMappingDto>()
@@ -60,6 +61,58 @@ namespace NetLearningGuide.UnitTest.Demo
             result.UserBirthday.ShouldBe(command.Birthday);
             result.Relation.ShouldBe(command.Relations);
             result.Comment.ShouldBeNull();
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task AutoMapperFunctionalTestCase2()
+        {
+            var inPut = new TestMapster()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Ta = 1.11m,
+                Time = DateTime.Now
+            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TestMapster, TestMapster>()).CreateMapper();
+            var outPut = mapper.Map<TestMapster>(inPut); 
+            inPut.Id = Guid.NewGuid().ToString();
+            inPut.Ta = 2.22m;
+            inPut.Time = DateTime.Now.AddDays(1);
+            outPut.Id.ShouldNotBe(inPut.Id);
+            outPut.Ta.ShouldNotBe(inPut.Ta);
+            outPut.Time.ShouldNotBe(inPut.Time);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task AutoMapperFunctionalTestCase3()
+        {
+            var inPut = new List<TestMapster>() {
+                new TestMapster()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Ta = 1.11m,
+                    Time = DateTime.Now
+                },
+                new TestMapster()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Ta = 3.33m,
+                    Time = DateTime.Now
+                },
+            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TestMapster, TestMapster>()).CreateMapper();
+            var outPut = mapper.Map<List<TestMapster>>(inPut);
+            inPut.ForEach(x =>
+            {
+                x.Id = Guid.NewGuid().ToString();
+                x.Ta = 2.22m;
+                x.Time = DateTime.Now.AddDays(1);
+            });
+            outPut.ForEach(x =>
+            {
+                inPut.Any(y => y.Id == x.Id).ShouldBeFalse();
+                inPut.Any(y => y.Ta == x.Ta).ShouldBeFalse();
+                inPut.Any(y => y.Time == x.Time).ShouldBeFalse();
+            });
             return Task.CompletedTask;
         }
     }
