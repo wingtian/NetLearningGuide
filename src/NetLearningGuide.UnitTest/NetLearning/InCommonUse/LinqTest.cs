@@ -115,7 +115,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             };
 
             var temp = (from li in list
-                        join ex in listExtend on new {li?.Name, Age = li?.Age ?? 0 } equals new {ex.Name, ex.Age } into tem
+                        join ex in listExtend on new { li?.Name, Age = li?.Age ?? 0 } equals new { ex.Name, ex.Age } into tem
                         from main in tem.DefaultIfEmpty()
                         select new LinqModelFinal()
                         {
@@ -130,6 +130,25 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             temp.Any(x => x.Name == "James" && x.Age == 2 && x.Marks == "Test2").ShouldBeTrue();
             temp.Any(x => x.Name == "Gluee" && x.Age == 1 && string.IsNullOrEmpty(x.Marks)).ShouldBeTrue();
             temp.Any(x => x.Name == "Gluee" && x.Age == 2 && string.IsNullOrEmpty(x.Marks)).ShouldBeTrue();
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task SumCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var value1 = list.Where(x => x.Name == "").Sum(x => x.Age);
+            value1.ShouldBe(0);
+            var value2 = list.Where(x => x.Name == "James").Sum(x => x.Age);
+            value2.ShouldBe(4);
             return Task.CompletedTask;
         }
     }
