@@ -151,5 +151,23 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             value2.ShouldBe(4);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task AnyCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var value1 = list.Any(x => x.Name == "");
+            value1.ShouldBeFalse();
+            var value2 = list.Any(x => x.Name == "James");
+            value2.ShouldBeTrue();
+            return Task.CompletedTask;
+        }
     }
 }
