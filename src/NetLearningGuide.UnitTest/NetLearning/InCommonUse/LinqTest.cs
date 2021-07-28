@@ -169,5 +169,29 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             value2.ShouldBeTrue();
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task ConcatCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var listConcat = new List<LinqModelFinal>()
+            {
+                new LinqModelFinal(){Age = 3,CreateDate = DateTime.Today,Marks = "Test",Name = "Apple"}
+            };
+            var name = (from model in list where model.Name == "James" select model.Name)
+                .Concat(from linqModelFinal in listConcat select linqModelFinal.Name).Distinct().ToList();
+            name.Count.ShouldBe(2);
+            name.ShouldContain("James");
+            name.ShouldContain("Apple");
+            return Task.CompletedTask;
+        }
     }
 }
