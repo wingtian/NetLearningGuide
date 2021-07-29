@@ -193,5 +193,16 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             name.ShouldContain("Apple");
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task CalculateCase1()
+        {
+            List<decimal> input = new List<decimal>() { 1, 2.1m, 4 };
+            var query = (from put in input select put * 2 * 3.14m).ToList();
+            query.ShouldContain(6.28M);
+            query.ShouldContain(13.188M);
+            query.ShouldContain(25.12M);
+            return Task.CompletedTask;
+        }
     }
 }
