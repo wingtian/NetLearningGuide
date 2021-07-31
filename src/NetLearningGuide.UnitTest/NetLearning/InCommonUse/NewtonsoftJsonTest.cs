@@ -34,5 +34,31 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             return Task.CompletedTask;
         }
         #endregion
+
+        #region MemberSerialization.OptOut
+        [JsonObject(MemberSerialization.OptOut)]
+        public class NewtonsoftJsonOptOutModel
+        { 
+            public int Age { get; set; }
+            [JsonIgnore]
+            public string Name { get; set; }
+            public string Sex { get; set; }
+            public bool IsMarry { get; set; }
+            public DateTime Birthday { get; set; }
+        }
+
+        [Fact]
+        public Task NewtonsoftJsonOptOutTestCase1()
+        {
+            var model = new NewtonsoftJsonOptOutModel() { Age = 1, Birthday = DateTime.Today, IsMarry = true, Name = "Aaron", Sex = "Men" };
+            var convert = JsonConvert.SerializeObject(model); 
+            convert.ShouldNotContain("Name");
+            convert.ShouldContain("Age");
+            convert.ShouldContain("Sex");
+            convert.ShouldContain("IsMarry");
+            convert.ShouldContain("Birthday");
+            return Task.CompletedTask;
+        } 
+        #endregion
     }
 }
