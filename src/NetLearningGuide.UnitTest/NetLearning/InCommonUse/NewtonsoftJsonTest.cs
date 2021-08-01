@@ -58,7 +58,39 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             convert.ShouldContain("IsMarry");
             convert.ShouldContain("Birthday");
             return Task.CompletedTask;
-        } 
+        }
+        #endregion
+        #region PropertyName  
+        public class NewtonsoftJsonPropertyNameModel
+        {
+            public int Age { get; set; } 
+            [JsonProperty(PropertyName = "EnName")]
+            public string Name { get; set; } 
+            public string Sex { get; set; }
+            [JsonProperty(PropertyName = "MarryTest")]
+            public bool IsMarry { get; set; }
+            public DateTime Birthday { get; set; }
+        }
+
+        [Fact]
+        public Task NewtonsoftJsonPropertyNameTestCase1()
+        {
+            var model = new NewtonsoftJsonPropertyNameModel() { Age = 1, Birthday = DateTime.Today, IsMarry = true, Name = "Aaron", Sex = "Men" };
+            var convert = JsonConvert.SerializeObject(model);
+            convert.ShouldContain("EnName");
+            convert.ShouldContain("Age");
+            convert.ShouldContain("Sex");
+            convert.ShouldContain("MarryTest");
+            convert.ShouldContain("Birthday");
+
+            var desConvert = JsonConvert.DeserializeObject<NewtonsoftJsonPropertyNameModel>(convert);
+            desConvert.Age.ShouldBe(model.Age);
+            desConvert.Birthday.ShouldBe(model.Birthday);
+            desConvert.IsMarry.ShouldBe(model.IsMarry);
+            desConvert.Name.ShouldBe(model.Name);
+            desConvert.Sex.ShouldBe(model.Sex);
+            return Task.CompletedTask;
+        }
         #endregion
     }
 }
