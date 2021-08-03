@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Shouldly;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -38,7 +39,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         #region MemberSerialization.OptOut
         [JsonObject(MemberSerialization.OptOut)]
         public class NewtonsoftJsonOptOutModel
-        { 
+        {
             public int Age { get; set; }
             [JsonIgnore]
             public string Name { get; set; }
@@ -51,7 +52,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         public Task NewtonsoftJsonOptOutTestCase1()
         {
             var model = new NewtonsoftJsonOptOutModel() { Age = 1, Birthday = DateTime.Today, IsMarry = true, Name = "Aaron", Sex = "Men" };
-            var convert = JsonConvert.SerializeObject(model); 
+            var convert = JsonConvert.SerializeObject(model);
             convert.ShouldNotContain("Name");
             convert.ShouldContain("Age");
             convert.ShouldContain("Sex");
@@ -63,9 +64,9 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         #region PropertyName  
         public class NewtonsoftJsonPropertyNameModel
         {
-            public int Age { get; set; } 
+            public int Age { get; set; }
             [JsonProperty(PropertyName = "EnName")]
-            public string Name { get; set; } 
+            public string Name { get; set; }
             public string Sex { get; set; }
             [JsonProperty(PropertyName = "MarryTest")]
             public bool IsMarry { get; set; }
@@ -89,6 +90,30 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             desConvert.IsMarry.ShouldBe(model.IsMarry);
             desConvert.Name.ShouldBe(model.Name);
             desConvert.Sex.ShouldBe(model.Sex);
+            return Task.CompletedTask;
+        }
+        #endregion
+        #region DefaultValue  
+        public class NewtonsoftJsonDefaultValueModel
+        {
+            public int Age { get; set; }
+            [DefaultValue("Aaron")]
+            public string Name { get; set; }
+            public string Sex { get; set; }
+            public bool IsMarry { get; set; }
+            public DateTime Birthday { get; set; }
+        }
+
+        [Fact]
+        public Task NewtonsoftJsonDefaultValueTestCase1()
+        {
+            var model = new NewtonsoftJsonDefaultValueModel() { Age = 1, Birthday = DateTime.Today, IsMarry = true, Sex = "Men" ,Name = "Aaron" };
+            var convert = JsonConvert.SerializeObject(model);
+            convert.ShouldContain("Aaron");
+            JsonSerializerSettings jsetting = new JsonSerializerSettings();
+            jsetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            convert = JsonConvert.SerializeObject(model, Formatting.Indented, jsetting);
+            convert.ShouldNotContain("Aaron"); 
             return Task.CompletedTask;
         }
         #endregion
