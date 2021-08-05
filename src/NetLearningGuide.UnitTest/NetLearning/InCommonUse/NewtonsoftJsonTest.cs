@@ -73,6 +73,15 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             public DateTime Birthday { get; set; }
         }
 
+        public class NewtonsoftJsonPropertyNameDeserializeObjectModel
+        {
+            public int AGE { get; set; } 
+            public string ENNAME { get; set; }
+            public string SEX { get; set; } 
+            public bool marrytest { get; set; }
+            public DateTime birthday { get; set; }
+        }
+
         [Fact]
         public Task NewtonsoftJsonPropertyNameTestCase1()
         {
@@ -90,6 +99,30 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             desConvert.IsMarry.ShouldBe(model.IsMarry);
             desConvert.Name.ShouldBe(model.Name);
             desConvert.Sex.ShouldBe(model.Sex);
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 测试DeserializeObject 不区分字段大小写
+        /// </summary>
+        /// <returns></returns>
+        [Fact]
+        public Task NewtonsoftJsonPropertyNameTestCase2()
+        {
+            var model = new NewtonsoftJsonPropertyNameModel() { Age = 1, Birthday = DateTime.Today, IsMarry = true, Name = "Aaron", Sex = "Men" };
+            var convert = JsonConvert.SerializeObject(model);
+            convert.ShouldContain("EnName");
+            convert.ShouldContain("Age");
+            convert.ShouldContain("Sex");
+            convert.ShouldContain("MarryTest");
+            convert.ShouldContain("Birthday");
+
+            var desConvert = JsonConvert.DeserializeObject<NewtonsoftJsonPropertyNameDeserializeObjectModel>(convert);
+            desConvert.AGE.ShouldBe(model.Age);
+            desConvert.birthday.ShouldBe(model.Birthday);
+            desConvert.marrytest.ShouldBe(model.IsMarry);
+            desConvert.ENNAME.ShouldBe(model.Name);
+            desConvert.SEX.ShouldBe(model.Sex);
             return Task.CompletedTask;
         }
         #endregion

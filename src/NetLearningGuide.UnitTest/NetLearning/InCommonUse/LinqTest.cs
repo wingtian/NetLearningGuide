@@ -204,5 +204,27 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             query.ShouldContain(25.12M);
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task FirstCase1()
+        {
+            try
+            {
+                var first = new List<decimal>().First();
+                first.ShouldNotBe(0);
+            }
+            catch (Exception e)
+            {
+                e.Message.ShouldBe("Sequence contains no elements");
+            }
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task FirstOrDefaultCase1()
+        {
+            var model = new List<decimal>().FirstOrDefault();
+            model.ShouldBe(default);
+            return Task.CompletedTask;
+        }
     }
 }

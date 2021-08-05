@@ -99,6 +99,36 @@ namespace NetLearningGuide.UnitTest.Demo
             output.TestTime.ShouldBe(inPut.Time);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MappingTestCase3()
+        {
+            var inPut = new List<TestMapsterUpper>() {
+                new TestMapsterUpper()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Ta = 1.11m,
+                    Time = DateTime.Now
+                },
+                new TestMapsterUpper()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Ta = 3.33m,
+                    Time = DateTime.Now
+                },
+            };
+            var outPut = inPut.Adapt<List<TestMappingUpper>>(); 
+             var inPuts = new TestMapsterUpper()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Ta = 1.11m,
+                Time = DateTime.Now
+            };
+            var outPuts = inPut.Adapt<TestMappingUpper>();
+            outPuts.ID.ShouldBe(default);
+            outPuts.TA.ShouldBe(default);
+            outPuts.TIME.ShouldBe(default);
+            return Task.CompletedTask;
+        }
     }
 
     public class TestMapster
@@ -116,4 +146,17 @@ namespace NetLearningGuide.UnitTest.Demo
         public decimal TestTa { get; set; }
         public DateTime TestTime { get; set; }
     }
+
+    public class TestMapsterUpper
+    {
+        public string Id { get; set; }
+        public decimal Ta { get; set; }
+        public DateTime Time { get; set; }
+    }
+    public class TestMappingUpper
+    {
+        public string ID { get; set; }
+        public decimal TA { get; set; }
+        public DateTime TIME { get; set; } 
+    } 
 }
