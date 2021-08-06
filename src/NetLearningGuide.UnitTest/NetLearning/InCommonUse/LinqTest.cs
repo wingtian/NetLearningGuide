@@ -226,5 +226,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             model.ShouldBe(default);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task SumCase1()
+        {
+            var model = new List<decimal>().Sum();
+            model.ShouldBe(default);
+            return Task.CompletedTask;
+        }
     }
 }
