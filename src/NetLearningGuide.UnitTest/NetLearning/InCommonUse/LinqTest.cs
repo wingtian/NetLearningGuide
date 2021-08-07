@@ -227,10 +227,31 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             return Task.CompletedTask;
         }
         [Fact]
-        public Task SumCase1()
+        public Task SumCase2()
         {
             var model = new List<decimal>().Sum();
             model.ShouldBe(default);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task MaxCase1()
+        {
+            try
+            { 
+                var model = new List<decimal>().Max();
+                model.ShouldBe(default);
+            }
+            catch (Exception e)
+            {
+                e.Message.ShouldBe("Sequence contains no elements");
+            }
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task MaxCase2()
+        {
+            var model = new List<decimal>(){1,0}.Max();
+            model.ShouldBe(1);
             return Task.CompletedTask;
         }
     }
