@@ -50,11 +50,31 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             });
             return Task.CompletedTask;
         }
-    private class InputTest
-    {
-        public string Id { get; set; }
-        public int Age { get; set; }
-        public DateTime Time { get; set; }
+
+        [Fact]
+        public Task AddRangeTestCase1()
+        {
+            var a = new List<string>(); 
+            a.AddRange(new List<string>());
+            a.Count.ShouldBe(0); 
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task AddRangeTestCase2()
+        {
+            var a = new List<string>() { "A", "B" };
+            var b = new List<string>() { "C", "B" };
+            a.AddRange(b);
+            a = a.Distinct().ToList();
+            a.Count.ShouldBe(3);
+            b.Count.ShouldBe(2);
+            return Task.CompletedTask;
+        }
+        private class InputTest
+        {
+            public string Id { get; set; }
+            public int Age { get; set; }
+            public DateTime Time { get; set; }
+        }
     }
-}
 }
