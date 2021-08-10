@@ -54,9 +54,11 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         [Fact]
         public Task AddRangeTestCase1()
         {
-            var a = new List<string>(); 
+            var a = new List<string>();
             a.AddRange(new List<string>());
-            a.Count.ShouldBe(0); 
+            a.Count.ShouldBe(0);
+            a = a.Distinct().ToList();
+            a.Count.ShouldBe(0);
             return Task.CompletedTask;
         }
         [Fact]

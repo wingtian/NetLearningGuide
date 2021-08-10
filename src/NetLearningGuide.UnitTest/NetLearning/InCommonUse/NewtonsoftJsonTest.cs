@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Shouldly;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xunit;
@@ -75,9 +76,9 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
 
         public class NewtonsoftJsonPropertyNameDeserializeObjectModel
         {
-            public int AGE { get; set; } 
+            public int AGE { get; set; }
             public string ENNAME { get; set; }
-            public string SEX { get; set; } 
+            public string SEX { get; set; }
             public bool marrytest { get; set; }
             public DateTime birthday { get; set; }
         }
@@ -140,16 +141,32 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         [Fact]
         public Task NewtonsoftJsonDefaultValueTestCase1()
         {
-            var model = new NewtonsoftJsonDefaultValueModel() { Age = 1, Birthday = DateTime.Today, IsMarry = true, Sex = "Men" ,Name = "Aaron" };
+            var model = new NewtonsoftJsonDefaultValueModel() { Age = 1, Birthday = DateTime.Today, IsMarry = true, Sex = "Men", Name = "Aaron" };
             var convert = JsonConvert.SerializeObject(model);
             convert.ShouldContain("Aaron");
             JsonSerializerSettings jsetting = new JsonSerializerSettings();
             jsetting.DefaultValueHandling = DefaultValueHandling.Ignore;
             convert = JsonConvert.SerializeObject(model, Formatting.Indented, jsetting);
-            convert.ShouldNotContain("Aaron"); 
+            convert.ShouldNotContain("Aaron");
             return Task.CompletedTask;
         }
         #endregion
+
+        [Fact]
+        public Task NewtonsoftJsonTestCase1()
+        {
+            var a = new string[] { };
+            var b = new string[] { "" };
+            var c = new List<string>();
+            var d = new List<string>() { "" };
+            var convertA = JsonConvert.SerializeObject(a);
+            var convertB = JsonConvert.SerializeObject(b);
+            var convertC = JsonConvert.SerializeObject(c);
+            var convertD = JsonConvert.SerializeObject(d);
+            convertA.ShouldBe(convertC);
+            convertB.ShouldBe(convertD);
+            return Task.CompletedTask;
+        }
         //TODO 未完待续
     }
 }

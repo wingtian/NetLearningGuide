@@ -237,7 +237,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         public Task MaxCase1()
         {
             try
-            { 
+            {
                 var model = new List<decimal>().Max();
                 model.ShouldBe(default);
             }
@@ -250,8 +250,15 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         [Fact]
         public Task MaxCase2()
         {
-            var model = new List<decimal>(){1,0}.Max();
+            var model = new List<decimal>() { 1, 0 }.Max();
             model.ShouldBe(1);
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task CountCase1()
+        { 
+            new List<LinqModel>().Count(x => x.Age == 1).ShouldBe(0); 
             return Task.CompletedTask;
         }
     }
