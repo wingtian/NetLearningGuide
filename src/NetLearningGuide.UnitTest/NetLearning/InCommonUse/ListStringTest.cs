@@ -68,6 +68,18 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             result.Count(x => x == "c").ShouldBe(2);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task AddListTestCase1()
+        {
+            List<string> ls1 = new List<string> { "a", "b", "c", "d" };
+            AddList(ls1);
+            ls1.ShouldContain("TEST");
+            return Task.CompletedTask;
+        }
+        private void AddList(List<string> list)
+        {
+            list.Add("TEST");
+        }
         #endregion
     }
 }
