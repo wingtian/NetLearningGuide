@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using NetLearningGuide.Core.ConfigurationSetting;
 using NetLearningGuide.Core.DbUp.Tool;
 using NetLearningGuide.Core.EFCore;
+using NetLearningGuide.Core.HttpClientHelper;
 using NetLearningGuide.Core.Middlewares;
 using NetLearningGuide.Core.Services;
 using NetLearningGuide.Core.Services.ServiceLifetime;
@@ -35,6 +36,7 @@ namespace NetLearningGuide.Core.Module
             RegisterDatabase(builder);
             RegisterDbUp(builder);
             RegisterValidator(builder);
+            RegisterHttp(builder);
         }
         private void RegisterDbUp(ContainerBuilder builder)
         {
@@ -126,6 +128,11 @@ namespace NetLearningGuide.Core.Module
                     .Where(x => x.IsClass && typeof(IEntityBusinessLogicValidator).IsAssignableFrom(x)).ToArray())
                 .AsSelf()
                 .AsImplementedInterfaces();
+        }
+        private void RegisterHttp(ContainerBuilder builder)
+        {
+            builder.RegisterType<NetHttpClientFactory>()
+                .As<INetHttpClientFactory>().InstancePerLifetimeScope();
         }
     }
 }
