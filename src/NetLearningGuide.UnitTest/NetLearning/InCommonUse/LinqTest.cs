@@ -257,9 +257,89 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
 
         [Fact]
         public Task CountCase1()
-        { 
-            new List<LinqModel>().Count(x => x.Age == 1).ShouldBe(0); 
+        {
+            new List<LinqModel>().Count(x => x.Age == 1).ShouldBe(0);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task JoinCase1()
+        {
+            var input = new List<InputCase>()
+            {
+                new InputCase(){Werks = "1234" ,Material = "123C",Description = "TESTT",Stock = 2},
+                new InputCase(){Werks = "1234" ,Material = "123T",Description = "TESTd",Stock = 3},
+                new InputCase(){Werks = "1234" ,Material = "123A",Description = "TESTA",Stock = 4},
+            };
+            var material = new List<MaterialTestCase>()
+            {
+                new MaterialTestCase(){Werks = "1234" ,Material = "123C",Description = "TEST",Stock = 1,Region = "123"},
+                new MaterialTestCase(){Werks = "1234" ,Material = "123T",Description = "TEST",Stock = 1,Region = "123"},
+                new MaterialTestCase(){Werks = "1234" ,Material = "123B",Description = "TEST",Stock = 1,Region = "123"},
+            };
+            var joinData = material.Join(input, p => new { p.Werks, p.Material }, c => new { c.Werks, c.Material },
+                (ip, mt) =>
+                {
+                    var returnModel = ip;
+                    returnModel.Description = mt.Description;
+                    returnModel.Stock = mt.Stock;
+                    return returnModel;
+                }).ToList();
+            joinData.Count.ShouldBe(2);
+            joinData.Any(x => x.Werks == "1234" && x.Material == "123C" && x.Description == "TESTT" && x.Stock == 2 && x.Region == "123").ShouldBeTrue();
+            joinData.Any(x => x.Werks == "1234" && x.Material == "123T" && x.Description == "TESTd" && x.Stock == 3 && x.Region == "123").ShouldBeTrue();
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task GroupJoinCase1()
+        {
+            var input = new List<InputCase>()
+            {
+                new InputCase(){Werks = "1234" ,Material = "123C",Description = "TESTT",Stock = 2},
+                new InputCase(){Werks = "1234" ,Material = "123C",Description = "TESTT",Stock = 2},
+                new InputCase(){Werks = "1234" ,Material = "123T",Description = "TESTd",Stock = 3},
+                new InputCase(){Werks = "1234" ,Material = "123T",Description = "TESTd",Stock = 3},
+                new InputCase(){Werks = "1234" ,Material = "123A",Description = "TESTA",Stock = 4},
+            };
+            var material = new List<MaterialTestCase>()
+            {
+                new MaterialTestCase(){Werks = "1234" ,Material = "123C",Description = "TEST",Stock = 1,Region = "123"},
+                new MaterialTestCase(){Werks = "1234" ,Material = "123T",Description = "TEST",Stock = 1,Region = "123"},
+                new MaterialTestCase(){Werks = "1234" ,Material = "123B",Description = "TEST",Stock = 1,Region = "123"},
+            };
+            var joinData = material.GroupJoin(input, p => new { p.Werks, p.Material }, c => new { c.Werks, c.Material },
+                (ip, mt) =>
+                {
+                    var returnModel = ip;
+                    var inputCases = mt.ToList();
+                    if (inputCases.Any())
+                    {
+                        returnModel.Description = inputCases.FirstOrDefault()?.Description;
+                        returnModel.Stock = inputCases.Sum(x => x.Stock);
+                    }
+                    return returnModel;
+                }).ToList();
+            joinData.Count.ShouldBe(3);
+            joinData.Any(x => x.Werks == "1234" && x.Material == "123C" && x.Description == "TESTT" && x.Stock == 4 && x.Region == "123").ShouldBeTrue();
+            joinData.Any(x => x.Werks == "1234" && x.Material == "123T" && x.Description == "TESTd" && x.Stock == 6 && x.Region == "123").ShouldBeTrue();
+            joinData.Any(x => x.Werks == "1234" && x.Material == "123B" && x.Description == "TEST" && x.Stock == 1 && x.Region == "123").ShouldBeTrue();
+            return Task.CompletedTask;
+        }
+        public class InputCase
+        {
+            public string Werks { get; set; }
+            public string Material { get; set; }
+            public string Description { get; set; }
+            public int Stock { get; set; }
+        }
+
+        public class MaterialTestCase
+        {
+            public string Werks { get; set; }
+            public string Material { get; set; }
+            public string Description { get; set; }
+            public int Stock { get; set; }
+            public string Region { get; set; }
+        }
+
     }
 }
