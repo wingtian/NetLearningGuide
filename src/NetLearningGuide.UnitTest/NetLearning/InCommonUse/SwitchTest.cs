@@ -33,7 +33,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         [Fact]
         public Task SwitchTestCase2()
         {
-            TestFunctionCase2(0,new TestSwitchClass(true)).ShouldBeFalse();
+            TestFunctionCase2(0, new TestSwitchClass(true)).ShouldBeFalse();
             TestFunctionCase2(0, new TestSwitchClass(false)).ShouldBeTrue();
             return Task.CompletedTask;
         }
@@ -54,6 +54,26 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 IsTrue = isTrue;
             }
             public bool IsTrue { get; set; }
+        }
+
+        [Fact]
+        public Task SwitchTestCase3()
+        {
+            TestFunction3(0).ShouldBeFalse();
+            TestFunction3(1).ShouldBeTrue();
+            TestFunction3(2).ShouldBeFalse();
+            TestFunction3(3).ShouldBeFalse();
+            return Task.CompletedTask;
+        }
+        private bool TestFunction3(int input)
+        {
+            switch (input)
+            {
+                case 1:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
