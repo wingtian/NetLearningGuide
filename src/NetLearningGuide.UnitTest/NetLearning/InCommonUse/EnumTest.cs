@@ -7,7 +7,7 @@ using Xunit;
 
 namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
 {
-    public class EnumForeachTest
+    public class EnumTest
     {
         ///https://www.cnblogs.com/salmol/p/14720130.html
         private enum Db
@@ -53,7 +53,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             }
             catch (Exception e)
             {
-                e.Message.ShouldBe("Object reference not set to an instance of an object."); 
+                e.Message.ShouldBe("Object reference not set to an instance of an object.");
             }
             return Task.CompletedTask;
         }
@@ -69,6 +69,32 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             public Dictionary<string, string> Headers { get; set; }
 
             public TokenModel Token { get; set; }
+        }
+
+        [Flags]
+        enum Week
+        {
+            Monday = 1,
+            Tuesday = 2,
+            Wednesday = 4,
+            Thursday = 8,
+            Friday = 16,
+            Saturday = 32,
+            Sunday = 64,
+        }
+
+        [Fact]
+        public Task EnumFlagsTestCase1()
+        {
+            int test = (int)(Week.Monday | Week.Tuesday);
+            test.ShouldBe(3);
+            var test2 = (Week)Enum.Parse(typeof(Week), "3");
+            test2.ShouldBe(Week.Monday | Week.Tuesday);
+            var test3 = (Week)Enum.Parse(typeof(Week), "127");
+            test3.ShouldBe(Week.Monday | Week.Tuesday | Week.Wednesday | Week.Thursday | Week.Friday | Week.Saturday | Week.Sunday);
+            Week test4 = (Week)Enum.Parse(typeof(Week), "0");
+            test4.ShouldBe((Week)(0));
+            return Task.CompletedTask;
         }
     }
 }
