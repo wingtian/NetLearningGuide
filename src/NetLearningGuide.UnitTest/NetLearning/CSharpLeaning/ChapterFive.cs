@@ -114,6 +114,29 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
                 }
             }
         }
+
+        public class StaticIdTest
+        {
+            public StaticIdTest(string ma)
+            {
+                Ma = ma;
+                NextId += 1;
+            }
+            public string Ma { get; set; }
+            public static int NextId = 30;
+        }
+
+        [Fact]
+        public Task AtributeTestCase3()
+        {
+            var test = StaticIdTest.NextId;
+            test.ShouldBe(30);
+            var model = new StaticIdTest("test");
+            var test2 = StaticIdTest.NextId;
+            test2.ShouldBe(31);
+            model.Ma.ShouldBe("test");
+            return Task.CompletedTask;
+        }
         #endregion
     }
 }
