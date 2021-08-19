@@ -132,7 +132,40 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             temp.Any(x => x.Name == "Gluee" && x.Age == 2 && string.IsNullOrEmpty(x.Marks)).ShouldBeTrue();
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task JoinTestCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Vins",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Luke",Age = 1,CreateDate = DateTime.Today},
+            };
+            var listExtend = new List<LinqModelExtend>()
+            {
+                new LinqModelExtend(){Name = "James",Age = 1,Marks = "Test1"},
+                new LinqModelExtend(){Name = "Tom",Age = 2,Marks = "Test2"},
+                new LinqModelExtend(){Name = "AAA",Age = 2,Marks = "Test2"},
+                new LinqModelExtend(){Name = "BB",Age = 2,Marks = "Test2"},
+                new LinqModelExtend(){Name = "CC",Age = 2,Marks = "Test2"},
+                new LinqModelExtend(){Name = "EE",Age = 2,Marks = "Test2"},
+                new LinqModelExtend(){Name = "DD",Age = 2,Marks = "Test2"},
+            };
 
+            var temp = (from li in list
+                        join ex in listExtend on new { li?.Name, Age = li?.Age ?? 0 } equals new { ex.Name, ex.Age } into tem
+                        from main in tem.DefaultIfEmpty()
+                        select new LinqModelFinal()
+                        {
+                            Name = li.Name,
+                            Age = li.Age,
+                            Marks = main?.Marks,
+                            CreateDate = li.CreateDate
+                        }).ToList();
+            temp.Count.ShouldBe(4);
+            return Task.CompletedTask;
+        }
         [Fact]
         public Task SumCase1()
         {
@@ -266,7 +299,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var input = new List<InputCase>()
             {
-                new InputCase(){Werks = "1234" ,Material = "123C",Description = "TESTT",Stock = 2}, 
+                new InputCase(){Werks = "1234" ,Material = "123C",Description = "TESTT",Stock = 2},
                 new InputCase(){Werks = "1234" ,Material = "123T",Description = "TESTd",Stock = 3},
                 new InputCase(){Werks = "1234" ,Material = "123A",Description = "TESTA",Stock = 4},
             };
