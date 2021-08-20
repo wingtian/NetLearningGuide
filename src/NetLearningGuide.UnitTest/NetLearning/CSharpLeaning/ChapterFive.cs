@@ -138,5 +138,22 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
             return Task.CompletedTask;
         }
         #endregion
+
+        #region 扩展方法
+        [Fact]
+        public Task ExtendFunctionCase1()
+        {
+            var result = new StaticIdTest("").Initail();
+            result.Ma.ShouldBe("test");
+            return Task.CompletedTask;
+        }
+        #endregion
+    }
+    public static class TestExtend
+    {
+        public static ChapterFive.StaticIdTest Initail(this ChapterFive.StaticIdTest input)
+        {
+            return new ChapterFive.StaticIdTest("test");
+        }
     }
 }
