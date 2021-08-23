@@ -148,6 +148,27 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
             return Task.CompletedTask;
         }
         #endregion
+        #region 分布类
+
+        public partial class PartialClassTest
+        {
+            public string A { get; set; }
+        }
+        public partial class PartialClassTest
+        {
+            public string B { get; set; }
+        }
+        [Fact]
+        public Task PartialClassTestCase1()
+        {
+            var result = new PartialClassTest();
+            result.A.ShouldBeNull();
+            result.B.ShouldBeNull();
+            return Task.CompletedTask;
+        }
+
+        #endregion
+
     }
     public static class TestExtend
     {
