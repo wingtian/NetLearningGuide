@@ -435,7 +435,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             var query = list.Where(x => x.Name.Equals("james", StringComparison.OrdinalIgnoreCase)).ToList();//不区分大小写
             query.Count.ShouldBe(3);
             query = list.Where(x => x.Name.Equals("James", StringComparison.OrdinalIgnoreCase)).ToList();//不区分大小写
-            query.Count.ShouldBe(3);
+            query.Count.ShouldBe(3);//test
             return Task.CompletedTask;
         }
     }
