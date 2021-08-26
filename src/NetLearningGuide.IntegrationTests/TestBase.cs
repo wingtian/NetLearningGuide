@@ -9,7 +9,7 @@ using Microsoft.Extensions.Caching.Memory;
 namespace NetLearningGuide.IntegrationTests
 {
     public class TestBase : IDisposable
-    {
+    { 
         protected IConfiguration Configuration;
         private ILifetimeScope _container;
         protected ContainerBuilder TestBuilder { get; set; } 
