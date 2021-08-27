@@ -402,6 +402,41 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             public int Stock { get; set; }
             public string Region { get; set; }
         }
-
+        [Fact]
+        public Task CaseTestCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var query = list.Where(x => x.Name == "james").ToList();
+            query.Count.ShouldBe(0);
+            query = list.Where(x => x.Name == "James").ToList();//区分大小写
+            query.Count.ShouldBe(3);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task CaseTestCase2()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var query = list.Where(x => x.Name.Equals("james", StringComparison.OrdinalIgnoreCase)).ToList();//不区分大小写
+            query.Count.ShouldBe(3);
+            query = list.Where(x => x.Name.Equals("James", StringComparison.OrdinalIgnoreCase)).ToList();//不区分大小写
+            query.Count.ShouldBe(3);
+            return Task.CompletedTask;
+        }
     }
 }
