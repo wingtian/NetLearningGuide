@@ -84,6 +84,40 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
                 //var model = test.Id; 
             }
         }
+        #endregion 
+        #region 重写属性
+
+        public class PdaItem
+        {
+            public virtual string Name { get; set; }
+        }
+
+        public class Contact : PdaItem
+        {
+            public override string Name
+            {
+                get { return $"{FirstName} {LastName}"; }
+                set
+                {
+                    string[] names = value.Split(' ');
+                    FirstName = names[0];
+                    LastName = names[1];
+                }
+            }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
+        [Fact]
+        public Task OverrideTestCase()
+        {
+            //"运行时"调用虚方法派生得最远的实现
+            Contact contact = new Contact();
+            PdaItem item = contact; 
+            item.Name = "VINSON TIAN";
+            contact.FirstName.ShouldBe("VINSON");
+            contact.LastName.ShouldBe("TIAN");
+            return Task.CompletedTask;
+        }
         #endregion
     }
 }
