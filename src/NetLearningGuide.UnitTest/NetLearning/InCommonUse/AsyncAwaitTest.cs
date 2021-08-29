@@ -49,5 +49,27 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             return Task.CompletedTask;
         }
         #endregion
+
+        #region Task.FromResult 
+        private string ReturnHello()
+        {
+            return "Hello";
+        }
+
+        [Fact]
+        public async Task FromResultTestCase1()
+        {
+            var result = await Task.FromResult(ReturnHello());
+            result.ShouldBe("Hello");
+        }
+        #endregion
+        #region Task.Run
+        [Fact]
+        public async Task RunTestCase1()
+        {
+            var result = await Task.Run(() => ReturnHello());
+            result.ShouldBe("Hello");
+        } 
+        #endregion
     }
 }
