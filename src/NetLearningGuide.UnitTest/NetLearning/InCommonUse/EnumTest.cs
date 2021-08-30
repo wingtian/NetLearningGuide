@@ -94,6 +94,19 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test3.ShouldBe(Week.Monday | Week.Tuesday | Week.Wednesday | Week.Thursday | Week.Friday | Week.Saturday | Week.Sunday);
             Week test4 = (Week)Enum.Parse(typeof(Week), "0");
             test4.ShouldBe((Week)(0));
+            var test5 = test3.ToString();
+            test5.ShouldContain(Week.Monday.ToString());
+            var test6 = test4.ToString();
+            test6.ShouldBe("0");
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task EnumFlagsTestCase2()
+        {
+            var test = (DayOfWeek.Monday | DayOfWeek.Tuesday).ToString();
+            var test1 = test.Contains(DayOfWeek.Monday.ToString());
+            test1.ShouldBeFalse(); // Wednesday 
             return Task.CompletedTask;
         }
     }
