@@ -109,5 +109,33 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test1.ShouldBeFalse(); // Wednesday 
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task EnumFlagsTestCase3()
+        {
+            var date1 = Convert.ToDateTime("2021-07-19");
+            var input1 = ((Week)Enum.Parse(typeof(Week), "21")).ToString();
+            var getDate1 = GetCheckDate(date1, input1);
+            getDate1.ToString("yyyy-MM-dd").ShouldBe("2021-07-19");
+
+            var date2 = Convert.ToDateTime("2021-07-17");
+            var input2 = ((Week)Enum.Parse(typeof(Week), "21")).ToString();
+            var getDate2 = GetCheckDate(date2, input2);
+            getDate2.ToString("yyyy-MM-dd").ShouldBe("2021-07-19");
+            return Task.CompletedTask;
+        }
+
+        private DateTime GetCheckDate(DateTime input, string week)
+        {
+            var result = input;
+            if (week.Length < 3)
+                return result;
+            for (int i = 0; i < 8; i++)
+            {
+                if (week.Contains(result.DayOfWeek.ToString()))
+                    break;
+                result = result.AddDays(1);
+            }
+            return result;
+        }
     }
 }
