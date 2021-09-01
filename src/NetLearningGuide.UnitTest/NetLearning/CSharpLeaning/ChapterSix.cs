@@ -171,6 +171,42 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
             test4.ShouldBe("BaseClass");
             return Task.CompletedTask;
         }
+        #endregion
+
+        #region 抽象类
+
+        public abstract class PdaItems
+        {
+            public PdaItems(string name)
+            {
+                Name = name;
+            }
+            public virtual string Name { get; set; }
+            public abstract string GetSummary();
+        }
+
+        public class Contacts : PdaItems
+        {
+            public Contacts(string name) : base(name)
+            {
+                Name = name + "abc";
+            }
+            public override string GetSummary()
+            {
+                return "ABC";
+            }
+            public sealed override string Name { get; set; }
+        }
+
+        [Fact]
+        public Task AbstractTestCase()
+        { 
+            Contacts contacts = new Contacts("Test");
+            PdaItems items = contacts;
+            contacts.Name.ShouldBe("Testabc");
+            items.Name.ShouldBe("Testabc");
+            return Task.CompletedTask;
+        }
 
         #endregion
     }
