@@ -44,7 +44,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
         [Fact]
         public Task ExplicitTestCase1()
         {
-            var test = (UtmCoordinatesCase2)(new GpsCoordinatesCase2()); //(UtmCoordinatesCase2) 代表显示转换
+            UtmCoordinatesCase2 test = (UtmCoordinatesCase2)(new GpsCoordinatesCase2()); //(UtmCoordinatesCase2) 代表显示转换
             test.Test.ShouldBe("HHH");
             return Task.CompletedTask;
         }
@@ -112,12 +112,66 @@ namespace NetLearningGuide.UnitTest.NetLearning.CSharpLeaning
         {
             //"运行时"调用虚方法派生得最远的实现
             Contact contact = new Contact();
-            PdaItem item = contact; 
+            PdaItem item = contact;
             item.Name = "VINSON TIAN";
             contact.FirstName.ShouldBe("VINSON");
             contact.LastName.ShouldBe("TIAN");
             return Task.CompletedTask;
         }
+        #endregion
+
+        #region Override new 
+
+        public class Program
+        {
+            public class BaseClass
+            {
+                public string DisplayName()
+                {
+                    return "BaseClass";
+                }
+            }
+
+            public class DerivedClass : BaseClass
+            {
+                public virtual string DisplayName()
+                {
+                    return "DerivedClass";
+                }
+            }
+            public class SubDerivedClass : DerivedClass
+            {
+                public override string DisplayName()
+                {
+                    return "SubDerivedClass";
+                }
+            }
+            public class SuperSubDerivedClass : SubDerivedClass
+            {
+                public new string DisplayName()
+                {
+                    return "SuperSubDerivedClass";
+                }
+            }
+        }
+        [Fact]
+        public Task OverrideNewTestCase()
+        {
+            var superSubDerivedClass = new Program.SuperSubDerivedClass();
+            Program.SubDerivedClass subDerivedClass = superSubDerivedClass;
+            Program.DerivedClass derivedClass = superSubDerivedClass;
+            Program.BaseClass baseClass = superSubDerivedClass;
+            var test1 = superSubDerivedClass.DisplayName();
+            var test2 = subDerivedClass.DisplayName();
+            var test3 = derivedClass.DisplayName();
+            var test4 = baseClass.DisplayName();
+            test1.ShouldBe("SuperSubDerivedClass");
+            test2.ShouldBe("SubDerivedClass");
+            test3.ShouldBe("SubDerivedClass");
+            test4.ShouldBe("BaseClass");
+            return Task.CompletedTask;
+        }
+
         #endregion
     }
 }
