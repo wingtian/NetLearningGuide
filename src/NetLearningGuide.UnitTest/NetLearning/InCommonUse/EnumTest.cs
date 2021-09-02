@@ -71,7 +71,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             public TokenModel Token { get; set; }
         }
 
-        [Flags]
+        [Flags]//这会影响(Week)Enum.Parse(typeof(Week), "3") 取值
         enum Week
         {
             Monday = 1,
@@ -88,7 +88,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             int test = (int)(Week.Monday | Week.Tuesday);
             test.ShouldBe(3);
-            var test2 = (Week)Enum.Parse(typeof(Week), "3");
+            var test2 = (Week)Enum.Parse(typeof(Week), "3"); 
             test2.ShouldBe(Week.Monday | Week.Tuesday);
             var test3 = (Week)Enum.Parse(typeof(Week), "127");
             test3.ShouldBe(Week.Monday | Week.Tuesday | Week.Wednesday | Week.Thursday | Week.Friday | Week.Saturday | Week.Sunday);
@@ -136,6 +136,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 result = result.AddDays(1);
             }
             return result;
+        }
+        [Fact]
+        public Task EnumFlagsTestCase4()
+        { 
+            var test1 = (int)Enum.Parse(typeof(Week), "Monday");
+            test1.ShouldBe(1);
+            return Task.CompletedTask;
         }
     }
 }
