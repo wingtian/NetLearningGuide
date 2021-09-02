@@ -72,6 +72,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         }
 
         [Flags]//这会影响(Week)Enum.Parse(typeof(Week), "3") 取值
+        //用此算法不适用有非常多个类型
         enum Week
         {
             Monday = 1,
