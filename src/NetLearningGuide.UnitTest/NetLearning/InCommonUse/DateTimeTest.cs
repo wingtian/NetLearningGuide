@@ -27,7 +27,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
 
         [Fact]
         public Task DateTimeAddTestCase()
-        { 
+        {
             var date = GetTargetDate(Convert.ToDateTime("2021-07-08"), new List<string>()
             {
                 DayOfWeek.Saturday.ToString()
@@ -66,6 +66,55 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                     result = result.AddDays(1);
             });
             return result;
+        }
+
+        [Fact]
+        public Task DateTimeTestCase1()
+        {
+            var test = DateTime.MinValue.DayOfWeek;
+            test.ShouldBe(DayOfWeek.Monday);
+            var date = new TestDateTime();
+            var result1 = date.Time1 > date.Time2;
+            (result1).ShouldBe(false);
+            var result2 = date.Time1 == date.Time2;
+            (result2).ShouldBe(false);
+            var result3 = date.Time1 < date.Time2;
+            (result3).ShouldBe(false);
+            date.Time1.ShouldBe(DateTime.MinValue);
+            date.Time1 = DateTime.Now;
+            (date.Time1 > date.Time2).ShouldBe(false);
+            (date.Time1 < date.Time2).ShouldBe(false);
+            (date.Time1 == date.Time2).ShouldBe(false);
+            return Task.CompletedTask;
+        }
+        private class TestDateTime
+        {
+            public DateTime Time1 { get; set; }
+            public DateTime? Time2 { get; set; }
+        }
+
+        [Fact]
+        public Task DateDiffSkipSundayTestCase1()
+        {
+            var startDate = Convert.ToDateTime("2021-09-04");
+            var endDate = Convert.ToDateTime("2021-09-06");
+            var result = DateDiffSkipSunday(startDate, endDate);
+            result.ShouldBe(2);
+            return Task.CompletedTask;
+        }
+
+        private int DateDiffSkipSunday(DateTime dateStart, DateTime dateEnd)
+        {
+            DateTime start = Convert.ToDateTime(dateStart.ToShortDateString());
+            DateTime end = Convert.ToDateTime(dateEnd.ToShortDateString());
+            var sp = end.Subtract(start).Days;
+            var count = sp;
+            for (int i = 1; i <= count; i++)
+            {
+                if (start.AddDays(i).DayOfWeek == DayOfWeek.Sunday)
+                    sp--;
+            }
+            return sp + 1;
         }
     }
 }
