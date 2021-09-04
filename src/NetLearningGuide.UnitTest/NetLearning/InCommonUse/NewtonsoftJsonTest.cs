@@ -35,6 +35,14 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             convert.ShouldNotContain("Birthday");
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task NewtonsoftJsonOptInTestCase2()
+        { 
+            var convert = JsonConvert.SerializeObject(null);
+            convert.ShouldBe("null");
+            return Task.CompletedTask;
+        }
         #endregion
 
         #region MemberSerialization.OptOut
