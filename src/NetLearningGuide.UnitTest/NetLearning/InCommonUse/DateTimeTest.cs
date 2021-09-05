@@ -116,5 +116,16 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             }
             return sp + 1;
         }
+
+        [Fact]
+        public Task DateTimeTestCase2()
+        {
+            var date = Convert.ToDateTime("2021-09-04");
+            date.Kind.ToString().ShouldBe("Unspecified");
+            date.Date.ToString("yyyy-MM-dd").ShouldBe("2021-09-04");
+            date.Ticks.ToString().ShouldBe("637663104000000000");
+            date.DayOfYear.ShouldBe(247);
+            return Task.CompletedTask;
+        }
     }
 }
