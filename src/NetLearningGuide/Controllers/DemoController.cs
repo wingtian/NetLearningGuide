@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetLearningGuide.Message.Basic;
 using NetLearningGuide.Message.Commands.Demo;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NetLearningGuide.Controllers
 {
@@ -33,6 +34,14 @@ namespace NetLearningGuide.Controllers
         public async Task<CommonResponse<string>> AutofacSingleton([FromQuery] DemoAutofacSingletonCommand command)
         {
             var response = await _mediator.SendAsync<DemoAutofacSingletonCommand, CommonResponse<string>>(command);
+            return response;
+        }
+
+        [AllowAnonymous]
+        [Route("DemoAutofacOverride"), HttpPost]
+        public async Task<CommonResponse<string>> DemoAutofacOverride(DemoAutofacOverrideCommand command)
+        {
+            var response = await _mediator.SendAsync<DemoAutofacOverrideCommand, CommonResponse<string>>(command);
             return response;
         }
     }

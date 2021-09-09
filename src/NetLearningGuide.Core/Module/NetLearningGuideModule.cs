@@ -15,6 +15,7 @@ using NetLearningGuide.Core.Services.ServiceLifetime;
 using NetLearningGuide.Core.Settings;
 using NetLearningGuide.Core.Validators;
 using NetLearningGuide.Message.Basic;
+using NetLearningGuide.Message.Dtos.Demo;
 using NetLearningGuide.Message.Mappings;
 
 namespace NetLearningGuide.Core.Module
@@ -37,6 +38,7 @@ namespace NetLearningGuide.Core.Module
             RegisterDbUp(builder);
             RegisterValidator(builder);
             RegisterHttp(builder);
+            RegisterTest(builder);
         }
         private void RegisterDbUp(ContainerBuilder builder)
         {
@@ -134,5 +136,10 @@ namespace NetLearningGuide.Core.Module
             builder.RegisterType<NetHttpClientFactory>()
                 .As<INetHttpClientFactory>().InstancePerLifetimeScope();
         }
+        private void RegisterTest(ContainerBuilder builder)
+        { 
+            var model = new AutoFacTestClass("Inital");
+            builder.RegisterInstance(model).SingleInstance();
+        } 
     }
 }

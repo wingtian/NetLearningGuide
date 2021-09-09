@@ -78,5 +78,21 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             public int Age { get; set; }
             public DateTime Time { get; set; }
         }
+        [Fact]
+        public Task ForloopTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            list.ForEach(x =>
+            {
+                if (x.Id == "abc")
+                    return;
+                x.Id.ShouldBe("bcd");
+            });
+            return Task.CompletedTask;
+        }
     }
 }
