@@ -157,5 +157,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test1.ShouldBe(1);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task EnumTestCase1()
+        {
+            var test = WeekEnum.Monday.ToString();
+            test.ShouldBe("Monday");
+            return Task.CompletedTask;
+        }
     }
 }
