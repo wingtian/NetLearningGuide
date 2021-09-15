@@ -438,5 +438,28 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             query.Count.ShouldBe(3);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task GroupByTestCase3()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var test = list.GroupBy(x => x.Age)
+                 .Select(g => new
+                 { 
+                     Age = g.Sum(t => t.Age)
+                 }).ToList();
+            //这里结果很奇怪
+            test.Count.ShouldBe(2);
+            test.Any(x=>x.Age == 6).ShouldBeTrue();
+            test.Any(x => x.Age == 3).ShouldBeTrue();
+            return Task.CompletedTask;
+        }
     }
 }
