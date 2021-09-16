@@ -131,5 +131,22 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             list.Any(x => x.Id == "abc").ShouldBeFalse();
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task ListFunctionTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            ListFunctionChange(list);
+            list.All(x=>x.Age == 10).ShouldBeTrue();
+            return Task.CompletedTask;
+        }
+
+        private void ListFunctionChange(List<InputTest> input)
+        {
+            input.ForEach(x => { x.Age = 10; });
+        }
     }
 }
