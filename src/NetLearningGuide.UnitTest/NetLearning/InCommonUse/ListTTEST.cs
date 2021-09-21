@@ -209,5 +209,18 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             convert.Any(x => x.Id == "bcd" && x.Age == 3).ShouldBeTrue();
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task ListFindTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var convert = list.Find(x => x.Age == 1);
+            convert.ShouldNotBeNull();
+            convert.Id.ShouldBe("abc");
+            return Task.CompletedTask;
+        }
     }
 }
