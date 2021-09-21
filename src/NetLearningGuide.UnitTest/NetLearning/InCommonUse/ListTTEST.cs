@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NetLearningGuide.Util;
 using Shouldly;
 using Xunit;
 
@@ -188,6 +189,24 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             var convert = list.ConvertAll(x => new InputConvertTest() { Age = x.Age, Id = x.Id });
             convert.Any(x => x.Id == "abc" && x.Age == 1).ShouldBeTrue();
             convert.Any(x => x.Id == "bcd" && x.Age == 2).ShouldBeTrue();
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task ListAsReadOnlyTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var convert = list.AsReadOnly();
+            convert.ForEach(x => { x.Age = 3; });
+
+            list.Any(x => x.Id == "abc" && x.Age == 3).ShouldBeTrue();
+            list.Any(x => x.Id == "bcd" && x.Age == 3).ShouldBeTrue();
+
+            convert.Any(x => x.Id == "abc" && x.Age == 3).ShouldBeTrue();
+            convert.Any(x => x.Id == "bcd" && x.Age == 3).ShouldBeTrue();
             return Task.CompletedTask;
         }
     }
