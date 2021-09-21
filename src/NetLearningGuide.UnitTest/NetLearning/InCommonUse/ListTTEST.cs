@@ -78,6 +78,11 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             public int Age { get; set; }
             public DateTime Time { get; set; }
         }
+        private class InputConvertTest
+        {
+            public string Id { get; set; }
+            public int Age { get; set; }
+        }
         [Fact]
         public Task ForloopTestCase1()
         {
@@ -124,10 +129,10 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } , 
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
-            list.RemoveAt(0); 
+            list.RemoveAt(0);
             list.Any(x => x.Id == "abc").ShouldBeFalse();
             return Task.CompletedTask;
         }
@@ -140,7 +145,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             ListFunctionChange(list);
-            list.All(x=>x.Age == 10).ShouldBeTrue();
+            list.All(x => x.Age == 10).ShouldBeTrue();
             return Task.CompletedTask;
         }
 
@@ -168,8 +173,21 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             {
                 new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
-            }; 
+            };
             list.Exists(x => x.Age == 1).ShouldBeTrue();
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task ListConvertAllTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var convert = list.ConvertAll(x => new InputConvertTest() { Age = x.Age, Id = x.Id });
+            convert.Any(x => x.Id == "abc" && x.Age == 1).ShouldBeTrue();
+            convert.Any(x => x.Id == "bcd" && x.Age == 2).ShouldBeTrue();
             return Task.CompletedTask;
         }
     }
