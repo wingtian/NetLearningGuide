@@ -217,9 +217,22 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
-            var convert = list.Find(x => x.Age == 1);
+            var convert = list.Find(x => x.Age == 1); 
             convert.ShouldNotBeNull();
             convert.Id.ShouldBe("abc");
+            return Task.CompletedTask;
+        }  
+        [Fact]
+        public Task ListReverseTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            list.Reverse();
+            list[0].Id.ShouldBe("bcd");
+            list[1].Id.ShouldBe("abc");
             return Task.CompletedTask;
         }
     }
