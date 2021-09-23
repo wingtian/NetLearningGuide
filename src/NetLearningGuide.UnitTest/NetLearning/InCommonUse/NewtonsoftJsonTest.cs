@@ -38,7 +38,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
 
         [Fact]
         public Task NewtonsoftJsonOptInTestCase2()
-        { 
+        {
             var convert = JsonConvert.SerializeObject(null);
             convert.ShouldBe("null");
             return Task.CompletedTask;
@@ -176,5 +176,23 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             return Task.CompletedTask;
         }
         //TODO 未完待续
+        //{"code":"503","msg":"未找到该分类或该分类已删除"}
+        public class ReturnList<T>
+        {
+            [JsonProperty(PropertyName = "code")]
+            public string Code { get; set; }
+            [JsonProperty(PropertyName = "msg")]
+            public string Msg { get; set; }
+            [JsonProperty(PropertyName = "data")]
+            public T Data { get; set; }
+        }
+
+        [Fact]
+        public Task NewtonsoftDeserializeObjectTestCase1()
+        {
+            var msg = "{\"code\":\"503\",\"msg\":\"未找到该分类或该分类已删除\"}";
+            var convert = JsonConvert.DeserializeObject<ReturnList<NewtonsoftJsonDefaultValueModel>>(msg);
+            return Task.CompletedTask;
+        }
     }
 }
