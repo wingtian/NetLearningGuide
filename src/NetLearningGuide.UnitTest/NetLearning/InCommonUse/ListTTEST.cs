@@ -217,11 +217,11 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
-            var convert = list.Find(x => x.Age == 1); 
+            var convert = list.Find(x => x.Age == 1);
             convert.ShouldNotBeNull();
             convert.Id.ShouldBe("abc");
             return Task.CompletedTask;
-        }  
+        }
         [Fact]
         public Task ListReverseTestCase1()
         {
@@ -233,6 +233,22 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             list.Reverse();
             list[0].Id.ShouldBe("bcd");
             list[1].Id.ShouldBe("abc");
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task ListFindLastTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var test = list.FindLast(x => x.Id == "abc");
+            test.Age.ShouldBe(2);
+            var test1 = list.FindLast(x => x.Id == "aaa");
+            test1.ShouldBeNull();
             return Task.CompletedTask;
         }
     }
