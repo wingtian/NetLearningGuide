@@ -247,8 +247,21 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             };
             var test = list.FindLast(x => x.Id == "abc");
             test.Age.ShouldBe(2);
-            var test1 = list.FindLast(x => x.Id == "aaa");
+            var test1 = list.FindLast(x => x.Id == "aaa"); 
             test1.ShouldBeNull();
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task ListFindIndexTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var test = list.FindIndex(0, x => x.Id == "abc");
+            test.ShouldBe(0);
             return Task.CompletedTask;
         }
     }
