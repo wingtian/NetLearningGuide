@@ -277,5 +277,23 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(0);
             return Task.CompletedTask;
         }
+        ///_items的容量是翻倍扩容的，基础扩容量如果不指定的话，默认为4。增长过程为4，8，16，32，64，128，256.......
+        [Fact]
+        public Task ListCapacityTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var test = list.Capacity;
+            test.ShouldBe(4);
+            list.Add(new InputTest());
+            list.Add(new InputTest());
+            test = list.Capacity;
+            test.ShouldBe(8);
+            return Task.CompletedTask;
+        }
     }
 }
