@@ -15,7 +15,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var model = list.FirstOrDefault(x => x.Id == "abc");
@@ -28,14 +28,16 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 list.Any(x => x.Age == model.Age).ShouldBeTrue();
                 list.Any(x => x.Time == model.Time).ShouldBeTrue();
             }
+
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListTValueAssignmentTestCase2()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var model = list.FirstOrDefault(x => x.Id == "abc");
@@ -62,6 +64,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             a.Count.ShouldBe(0);
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task AddRangeTestCase2()
         {
@@ -73,23 +76,26 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             b.Count.ShouldBe(2);
             return Task.CompletedTask;
         }
+
         private class InputTest
         {
             public string Id { get; set; }
             public int Age { get; set; }
             public DateTime Time { get; set; }
         }
+
         private class InputConvertTest
         {
             public string Id { get; set; }
             public int Age { get; set; }
         }
+
         [Fact]
         public Task ForloopTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             list.ForEach(x =>
@@ -100,49 +106,53 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             });
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListRemoveTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             list.Remove(list.FirstOrDefault(x => x.Id == "abc"));
             list.Any(x => x.Id == "abc").ShouldBeFalse();
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListRemoveAllTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             list.RemoveAll(x => x.Id == "abc");
             list.Any(x => x.Id == "abc").ShouldBeFalse();
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListRemoveAtTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             list.RemoveAt(0);
             list.Any(x => x.Id == "abc").ShouldBeFalse();
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListFunctionTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             ListFunctionChange(list);
@@ -154,12 +164,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             input.ForEach(x => { x.Age = 10; });
         }
+
         [Fact]
         public Task ListClearTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             list.Clear();
@@ -167,23 +178,25 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             list.Any(x => x.Id == "bcd").ShouldBeFalse();
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListExistsTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             list.Exists(x => x.Age == 1).ShouldBeTrue();
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListConvertAllTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var convert = list.ConvertAll(x => new InputConvertTest() { Age = x.Age, Id = x.Id });
@@ -191,12 +204,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             convert.Any(x => x.Id == "bcd" && x.Age == 2).ShouldBeTrue();
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListAsReadOnlyTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var convert = list.AsReadOnly();
@@ -209,12 +223,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             convert.Any(x => x.Id == "bcd" && x.Age == 3).ShouldBeTrue();
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListFindTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var convert = list.Find(x => x.Age == 1);
@@ -222,12 +237,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             convert.Id.ShouldBe("abc");
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListReverseTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             list.Reverse();
@@ -241,50 +257,53 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
-                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var test = list.FindLast(x => x.Id == "abc");
             test.Age.ShouldBe(2);
-            var test1 = list.FindLast(x => x.Id == "aaa"); 
+            var test1 = list.FindLast(x => x.Id == "aaa");
             test1.ShouldBeNull();
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListFindIndexTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
-                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var test = list.FindIndex(0, x => x.Id == "abc");
             test.ShouldBe(0);
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListFindLastIndexTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
-                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var test = list.FindLastIndex(0, x => x.Id == "abc");
             test.ShouldBe(0);
             return Task.CompletedTask;
         }
+
         ///_items的容量是翻倍扩容的，基础扩容量如果不指定的话，默认为4。增长过程为4，8，16，32，64，128，256.......
         [Fact]
         public Task ListCapacityTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
-                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var test = list.Capacity;
@@ -295,18 +314,35 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(8);
             return Task.CompletedTask;
         }
+
         [Fact]
         public Task ListGetRangeTestCase1()
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue } ,
-                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue } ,
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue },
                 new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
-            var test = list.GetRange(0,2);
+            var test = list.GetRange(0, 2);
             test.Any(x => x.Id == "abc" && x.Age == 1).ShouldBeTrue();
             test.Any(x => x.Id == "abc" && x.Age == 2).ShouldBeTrue();
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task ListInsertTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue },
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            list.Insert(3, new InputTest() { Id = "DDD", Age = 12 });
+            list.Any(x => x.Id == "abc" && x.Age == 1).ShouldBeTrue();
+            list.Any(x => x.Id == "abc" && x.Age == 2).ShouldBeTrue();
+            list.Any(x => x.Id == "DDD" && x.Age == 12).ShouldBeTrue();
             return Task.CompletedTask;
         }
     }
