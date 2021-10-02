@@ -44,5 +44,14 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ToString(CultureInfo.InvariantCulture).ShouldBe("1");
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathCeilingTestCase1()
+        {
+            var test = Convert.ToInt16(Math.Ceiling(1.1m));
+            test.ToString(CultureInfo.InvariantCulture).ShouldBe("2");
+            test = Convert.ToInt16(Math.Ceiling(1.9m));
+            test.ToString(CultureInfo.InvariantCulture).ShouldBe("2");
+            return Task.CompletedTask;
+        }
     }
 }
