@@ -53,5 +53,14 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ToString(CultureInfo.InvariantCulture).ShouldBe("2");
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathAbsTestCase1()
+        {
+            var test = Math.Abs(-1.1m);
+            test.ToString(CultureInfo.InvariantCulture).ShouldBe("1.1");
+            test = Math.Abs(1.9m);
+            test.ToString(CultureInfo.InvariantCulture).ShouldBe("1.9");
+            return Task.CompletedTask;
+        }
     }
 }
