@@ -62,5 +62,17 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ToString(CultureInfo.InvariantCulture).ShouldBe("1.9");
             return Task.CompletedTask;
         }
+        //Math.acos()用于计算反余弦，返回值的单位为弧度，对于[-1,1]之间的元素，函数值域为[0,pi]，
+        [Fact]
+        public Task MathAcosTestCase1()
+        { 
+            var test = Math.Acos(-1.1d);
+            test.ToString(CultureInfo.InvariantCulture).ShouldBe("NaN");
+            test = Math.Acos(1.9d);
+            test.ToString(CultureInfo.InvariantCulture).ShouldBe("NaN");
+            test = Math.Acos(0.32d);
+            test.ToString(CultureInfo.InvariantCulture).ShouldBe("1.2450668395002664");
+            return Task.CompletedTask;
+        }
     }
 }
