@@ -74,5 +74,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ToString(CultureInfo.InvariantCulture).ShouldBe("1.2450668395002664");
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task MathETestCase1()
+        {
+            var e = Math.E;
+            e.ToString(CultureInfo.InvariantCulture).ShouldBe("2.718281828459045");
+            return Task.CompletedTask;
+        }
     }
 }
