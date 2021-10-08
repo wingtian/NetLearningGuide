@@ -89,5 +89,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             e.ToString(CultureInfo.InvariantCulture).ShouldBe("3.141592653589793");
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathTauTestCase1()
+        {
+            var e = Math.Tau;
+            e.ToString(CultureInfo.InvariantCulture).ShouldBe("6.283185307179586");
+            return Task.CompletedTask;
+        }
     }
 }
