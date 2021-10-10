@@ -136,7 +136,6 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             getDate2.ToString("yyyy-MM-dd").ShouldBe("2021-07-19");
             return Task.CompletedTask;
         }
-
         private DateTime GetCheckDate(DateTime input, string week)
         {
             var result = input;
@@ -155,6 +154,14 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var test1 = (int)Enum.Parse(typeof(Week), "Monday");
             test1.ShouldBe(1);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task EnumFlagsTestCase5()
+        {
+            var test = (Week.Monday | Week.Tuesday).ToString();
+            var test1 = test.Contains(Week.Monday.ToString());
+            test1.ShouldBeTrue(); // Monday 
             return Task.CompletedTask;
         }
         [Fact]
