@@ -165,6 +165,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             return Task.CompletedTask;
         }
         [Fact]
+        public Task EnumFlagsTestCase6()
+        {
+            Week test = new Week();
+            test.ToString().ShouldBe("0"); 
+            return Task.CompletedTask;
+        }
+        [Fact]
         public Task EnumTestCase1()
         {
             var test = WeekEnum.Monday.ToString();
