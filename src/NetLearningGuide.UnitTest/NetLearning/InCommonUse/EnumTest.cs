@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NetLearningGuide.Core.HttpClientHelper;
 using Shouldly;
@@ -189,6 +190,31 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ToString().ShouldContain(Week.Monday.ToString());
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task EnumFlagsTestCase9()
+        {
+            var result = new Week();
+            var week = (Week.Monday | Week.Tuesday);
+            var test = week.ToString();
+            var test1 = (Week)Enum.Parse(typeof(Week), test);
+            test1.ShouldBe(Week.Monday | Week.Tuesday);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task EnumFlagsTestCase10()
+        {
+            Enum.GetNames(typeof(Week)).Contains("Monday").ShouldBeTrue();
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task EnumFlagsTestCase11()
+        { 
+            var getAll = (int)Week.Sunday * 2 - 1;
+            var test1 = (Week)Enum.Parse(typeof(Week), getAll.ToString());
+            test1.ShouldBe(Week.Monday | Week.Tuesday | Week.Wednesday | Week.Thursday | Week.Friday | Week.Saturday | Week.Sunday);
+            return Task.CompletedTask;
+        }
+
         [Fact]
         public Task EnumTestCase1()
         {
