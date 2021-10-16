@@ -479,5 +479,21 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.Any(x => x.Age == 1 && x.Name == "Gluee").ShouldBeTrue();
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task GetTypeTestCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var test = list.GetType().Name;
+            test.ShouldBe("List`1");
+            return Task.CompletedTask;
+        }
     }
 }
