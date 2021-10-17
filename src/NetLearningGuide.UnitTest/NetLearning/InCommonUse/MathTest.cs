@@ -96,5 +96,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             e.ToString(CultureInfo.InvariantCulture).ShouldBe("6.283185307179586");
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathMaxCase1()
+        {
+            var e = Math.Max(1,2);
+            e.ShouldBe(2);
+            return Task.CompletedTask;
+        }
     }
 }
