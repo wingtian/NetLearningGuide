@@ -103,5 +103,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             e.ShouldBe(2);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathMinCase1()
+        {
+            var e = Math.Min(1, 2);
+            e.ShouldBe(1);
+            return Task.CompletedTask;
+        }
     }
 }
