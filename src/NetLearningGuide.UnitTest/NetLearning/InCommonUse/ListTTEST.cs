@@ -345,5 +345,27 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             list.Any(x => x.Id == "DDD" && x.Age == 12).ShouldBeTrue();
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task ListTakeTestCase1()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue },
+                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var test = new List<InputTest>();
+
+            int j = 1;
+            for (int i = 0; i < list.Count; i += 1)
+            {
+                var cList = list.Take(j).Skip(i).ToList();
+                j += 1;
+                test.AddRange(cList);
+            }
+            test.Count.ShouldBe(3);
+            return Task.CompletedTask;
+        }
     }
 }
