@@ -495,5 +495,23 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe("List`1");
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task GetEnumeratorCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var test = list.GetEnumerator();
+            var aa = test.MoveNext();
+            test.Current.ShouldNotBeNull(); 
+            test.Dispose();
+            return Task.CompletedTask;
+        }
     }
 }
