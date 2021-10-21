@@ -36,6 +36,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             return Task.CompletedTask;
         }
         [Fact]
+        public Task MathRoundTestCase4()
+        {
+            decimal test = Math.Round(1.199m, 2);
+            test.ToString("#0.00").ShouldBe("1.20");
+            return Task.CompletedTask;
+        }
+        [Fact]
         public Task MathFloorTestCase1()
         {
             var test = Convert.ToInt16(Math.Floor(1.1m));
@@ -65,7 +72,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         //Math.acos()用于计算反余弦，返回值的单位为弧度，对于[-1,1]之间的元素，函数值域为[0,pi]，
         [Fact]
         public Task MathAcosTestCase1()
-        { 
+        {
             var test = Math.Acos(-1.1d);
             test.ToString(CultureInfo.InvariantCulture).ShouldBe("NaN");
             test = Math.Acos(1.9d);
@@ -99,7 +106,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         [Fact]
         public Task MathMaxCase1()
         {
-            var e = Math.Max(1,2);
+            var e = Math.Max(1, 2);
             e.ShouldBe(2);
             return Task.CompletedTask;
         }
@@ -108,6 +115,18 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var e = Math.Min(1, 2);
             e.ShouldBe(1);
+            return Task.CompletedTask;
+        } 
+
+        [Fact]
+        public Task DivideTestCase1()
+        {
+            int a = 1;
+            int b = 100;
+            var c = Convert.ToDecimal(a) / Convert.ToDecimal(b);
+            var d = a / b;
+            c.ShouldBe(0.01m);
+            d.ShouldBe(0);
             return Task.CompletedTask;
         }
     }
