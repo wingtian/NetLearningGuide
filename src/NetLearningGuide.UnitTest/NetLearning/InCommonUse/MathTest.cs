@@ -116,7 +116,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             var e = Math.Min(1, 2);
             e.ShouldBe(1);
             return Task.CompletedTask;
-        } 
+        }
 
         [Fact]
         public Task DivideTestCase1()
@@ -127,6 +127,14 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             var d = a / b;
             c.ShouldBe(0.01m);
             d.ShouldBe(0);
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task MathCosTestCase1()
+        {
+            var test = Math.Cos(60 * Math.PI / 180);
+            test.ShouldBe(0.50000000000000011d);
             return Task.CompletedTask;
         }
     }
