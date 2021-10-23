@@ -137,5 +137,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(0.50000000000000011d);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathSinTestCase1()
+        {
+            var test = Math.Sin(30 * Math.PI / 180);
+            test.ShouldBe(0.49999999999999994d);
+            return Task.CompletedTask;
+        }
     }
 }
