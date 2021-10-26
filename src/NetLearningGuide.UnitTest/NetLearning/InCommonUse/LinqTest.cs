@@ -524,9 +524,34 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
-            }; 
+            };
             var result = list.Average(x => x.Age);
             result.ShouldBe(1.5d);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task ConcatTestCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var list2 = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var result = list.Concat(list2); 
+            result.Count().ShouldBe(12);
             return Task.CompletedTask;
         }
     }
