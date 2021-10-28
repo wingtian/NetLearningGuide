@@ -148,7 +148,14 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         public Task MathTanTestCase1()
         {
             var test = Math.Tan(45 * Math.PI / 180);
-            test.ShouldBe(0.99999999999999989d);
+            test.ShouldBe(0.99999999999999989d); 
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task MathAtanTestCase1()
+        {
+            var test = Math.Atan(45 * Math.PI / 180);
+            test.ShouldBe(0.66577375002835382d); 
             return Task.CompletedTask;
         }
     }
