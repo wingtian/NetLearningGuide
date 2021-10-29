@@ -158,5 +158,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(0.66577375002835382d); 
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathAsinTestCase1()
+        {
+            var test = Math.Asin(30 * Math.PI / 180);
+            test.ShouldBe(0.55106958309944631d);
+            return Task.CompletedTask;
+        }
     }
 }
