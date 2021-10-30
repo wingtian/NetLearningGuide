@@ -165,5 +165,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(0.55106958309944631d);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathAtan2TestCase1()
+        {
+            var test = Math.Atan2(30 * Math.PI / 180, 30 * Math.PI / 180);
+            test.ShouldBe(0.78539816339744828d);
+            return Task.CompletedTask;
+        }
     }
 }
