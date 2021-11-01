@@ -351,9 +351,9 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var list = new List<InputTest>()
             {
-                new InputTest() { Id = "abc", Age = 1, Time = DateTime.MinValue },
-                new InputTest() { Id = "abc", Age = 2, Time = DateTime.MinValue },
-                new InputTest() { Id = "bcd", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+                new InputTest() { Id = "aaa", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "bbb", Age = 2, Time = DateTime.MinValue },
+                new InputTest() { Id = "ccc", Age = 2, Time = DateTime.MinValue.AddYears(1) }
             };
             var test = new List<InputTest>();
 
@@ -363,6 +363,71 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 var cList = list.Take(j).Skip(i).ToList();
                 j += 1;
                 test.AddRange(cList);
+            }
+            test.Count.ShouldBe(3);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task ListTakeTestCase2()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "aaa", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "bbb", Age = 2, Time = DateTime.MinValue },
+                new InputTest() { Id = "ccc", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var test = new List<InputTest>();
+
+            int j = 1;
+            for (int i = 0; i < list.Count; i += 1)
+            {
+                var take = list.Take(j);
+                var take1 = take.ToList();
+                var skip = take.Skip(i);
+                var clist = skip.ToList();
+                j += 1;
+                test.AddRange(clist);
+            }
+            test.Count.ShouldBe(3);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task ListTakeTestCase3()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "aaa", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "bbb", Age = 2, Time = DateTime.MinValue },
+                new InputTest() { Id = "ccc", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var test = new List<InputTest>();
+
+            for (int i = 0; i < list.Count; i += 1)
+            {
+                var skip = list.Skip(i);
+                var take = skip.Take(1);
+                var clist = take.ToList();
+                test.AddRange(clist);
+            }
+            test.Count.ShouldBe(3);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task ListTakeTestCase4()
+        {
+            var list = new List<InputTest>()
+            {
+                new InputTest() { Id = "aaa", Age = 1, Time = DateTime.MinValue },
+                new InputTest() { Id = "bbb", Age = 2, Time = DateTime.MinValue },
+                new InputTest() { Id = "ccc", Age = 2, Time = DateTime.MinValue.AddYears(1) }
+            };
+            var test = new List<InputTest>();
+
+            int j = 1;
+            for (int i = 0; i < list.Count; i += 1)
+            { 
+                var clist = list.Skip(i).Take(j).ToList();
+                test.AddRange(clist);
             }
             test.Count.ShouldBe(3);
             return Task.CompletedTask;
