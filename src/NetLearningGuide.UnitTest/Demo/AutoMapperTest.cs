@@ -73,7 +73,7 @@ namespace NetLearningGuide.UnitTest.Demo
                 Time = DateTime.Now
             };
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TestMapster, TestMapster>()).CreateMapper();
-            var outPut = mapper.Map<TestMapster>(inPut); 
+            var outPut = mapper.Map<TestMapster>(inPut);
             inPut.Id = Guid.NewGuid().ToString();
             inPut.Ta = 2.22m;
             inPut.Time = DateTime.Now.AddDays(1);
@@ -114,6 +114,59 @@ namespace NetLearningGuide.UnitTest.Demo
                 inPut.Any(y => y.Time == x.Time).ShouldBeFalse();
             });
             return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task AutoMapperFunctionalTestCase4()
+        {
+            var inPut1 = new List<TestAutoMappter>() {
+                new TestAutoMappter("A")
+                {
+                    Ta = 111m,
+                    Key  = "A"
+                },
+                new TestAutoMappter( "B")
+                {
+                    Ta = 111m,
+                    Key  = "B"
+                },
+            };
+            var inPut2 = new List<TestAutoMappter>() {
+                new TestAutoMappter( "A1")
+                {
+                    Ta = 222m,
+                    Key  = "AA"
+                },
+                new TestAutoMappter("B1")
+                {
+                    Ta = 222m,
+                    Key  = "BB"
+                },
+                new TestAutoMappter("C1")
+                {
+                    Ta = 222m,
+                    Key  = "CC"
+                },
+            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TestMapster, TestMapster>()
+                    //.ReverseMap()
+                    .ForMember(x => x.Key, opt => opt.Ignore())
+                    ).CreateMapper();
+            var outPut1 = mapper.Map(inPut1, inPut2);
+            inPut2.Count.ShouldBe(2);
+            outPut1.Count.ShouldBe(2);
+            return Task.CompletedTask;
+        }
+        public class TestAutoMappter
+        {
+            public TestAutoMappter(string id)
+            {
+                Id = id;
+            }
+            public string Id { get; protected set; }
+            public decimal Ta { get; set; }
+            public DateTime Time { get; set; }
+            public string Key { get; set; }
         }
     }
 }

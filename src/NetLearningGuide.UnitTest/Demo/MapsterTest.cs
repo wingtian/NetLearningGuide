@@ -153,6 +153,7 @@ namespace NetLearningGuide.UnitTest.Demo
         public string Id { get; set; }
         public decimal Ta { get; set; }
         public DateTime Time { get; set; }
+        public string Key { get; set; }
     }
     public class TestMapping
     {
