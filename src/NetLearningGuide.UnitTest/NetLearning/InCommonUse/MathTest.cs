@@ -186,5 +186,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(1.059306170823243d);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathBigMulTestCase1()
+        {
+            var test = Math.BigMul(3,4);
+            test.ShouldBe(12);
+            return Task.CompletedTask;
+        }
     }
 }
