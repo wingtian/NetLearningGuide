@@ -189,7 +189,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         [Fact]
         public Task MathBigMulTestCase1()
         {
-            var test = Math.BigMul(3,4);
+            var test = Math.BigMul(3, 4);
             test.ShouldBe(12);
             return Task.CompletedTask;
         }
@@ -198,6 +198,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var test = Math.BitDecrement(3);
             test.ShouldBe(2.9999999999999996d);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task MathExpTestCase1()
+        {
+            var test = Math.Exp(4);
+            test.ShouldBe(54.598150033144236d);
             return Task.CompletedTask;
         }
     }
