@@ -193,5 +193,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(12);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathBitDecrementTestCase1()
+        {
+            var test = Math.BitDecrement(3);
+            test.ShouldBe(2.9999999999999996d);
+            return Task.CompletedTask;
+        }
     }
 }
