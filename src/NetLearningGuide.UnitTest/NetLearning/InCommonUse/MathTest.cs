@@ -207,5 +207,14 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(54.598150033144236d);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathDivRemTestCase1()
+        {
+            int result;
+            var test = Math.DivRem(5, 2, out result);
+            test.ShouldBe(2);
+            result.ShouldBe(1); 
+            return Task.CompletedTask;
+        }
     }
 }
