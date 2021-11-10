@@ -213,7 +213,14 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             int result;
             var test = Math.DivRem(5, 2, out result);
             test.ShouldBe(2);
-            result.ShouldBe(1); 
+            result.ShouldBe(1);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task MathILogBTestCase1()
+        {
+            var test = Math.ILogB(4);
+            test.ShouldBe(2);
             return Task.CompletedTask;
         }
     }
