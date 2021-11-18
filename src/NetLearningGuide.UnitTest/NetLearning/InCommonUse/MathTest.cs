@@ -245,5 +245,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(2d);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task MathMaxMagnitudeTestCase1()
+        {
+            var test = Math.MaxMagnitude(100,200);
+            test.ShouldBe(200d);
+            return Task.CompletedTask;
+        }
     }
 }
