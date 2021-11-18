@@ -237,5 +237,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(1.3862943611198906d);
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task MathLog10TestCase1()
+        {
+            var test = Math.Log10(100);
+            test.ShouldBe(2d);
+            return Task.CompletedTask;
+        }
     }
 }
