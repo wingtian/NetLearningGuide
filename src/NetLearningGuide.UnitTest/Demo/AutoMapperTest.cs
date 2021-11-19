@@ -168,5 +168,51 @@ namespace NetLearningGuide.UnitTest.Demo
             public DateTime Time { get; set; }
             public string Key { get; set; }
         }
+        public class TestAutoDtoMappter
+        { 
+            public decimal Ta { get; set; }
+            public DateTime Time { get; set; }
+            public string Key { get; set; }
+        }
+        [Fact]
+        public Task AutoMapperFunctionalTestCase5()
+        {
+            var inPut1 = new List<TestAutoMappter>() {
+                new TestAutoMappter("A")
+                {
+                    Ta = 111m,
+                    Key  = "A"
+                },
+                new TestAutoMappter( "B")
+                {
+                    Ta = 111m,
+                    Key  = "B"
+                },
+            };
+            var inPut2 = new List<TestAutoDtoMappter>() {
+                new TestAutoDtoMappter( )
+                {
+                    Ta = 222m,
+                    Key  = "AA"
+                },
+                new TestAutoDtoMappter( )
+                {
+                    Ta = 222m,
+                    Key  = "BB"
+                },
+                new TestAutoDtoMappter( )
+                {
+                    Ta = 222m,
+                    Key  = "BB"
+                }
+            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TestAutoMappter, TestAutoDtoMappter>()
+                .ForMember(x => x.Ta, opt => opt.MapFrom(src => src.Ta))
+                .ForMember(x => x.Key, opt => opt.MapFrom(src => src.Key))
+            ).CreateMapper();
+             mapper.Map(inPut1, inPut2);
+            inPut2.Count.ShouldBe(2); 
+            return Task.CompletedTask;
+        }
     }
 }
