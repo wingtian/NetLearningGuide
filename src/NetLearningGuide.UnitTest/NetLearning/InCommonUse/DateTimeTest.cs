@@ -21,7 +21,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             DateTime start = Convert.ToDateTime(dateStart.ToShortDateString());
             DateTime end = Convert.ToDateTime(dateEnd.ToShortDateString());
-            TimeSpan sp = end.Subtract(start);
+            TimeSpan sp = end.Subtract(start); 
             return sp.Days;
         }
 
@@ -125,6 +125,15 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             date.Date.ToString("yyyy-MM-dd").ShouldBe("2021-09-04");
             date.Ticks.ToString().ShouldBe("637663104000000000");
             date.DayOfYear.ShouldBe(247);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task DateTimeTestCase3()
+        {
+            var date = Convert.ToDateTime("2021-09-04");
+            var test = date.GetDateTimeFormats();
+            test.Length.ShouldBe(45);
+            test[0].ShouldBe("2021/9/4");
             return Task.CompletedTask;
         }
     }
