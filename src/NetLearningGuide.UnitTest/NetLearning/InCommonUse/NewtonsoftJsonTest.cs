@@ -3,6 +3,7 @@ using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -192,6 +193,54 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var msg = "{\"code\":\"503\",\"msg\":\"未找到该分类或该分类已删除\"}";
             var convert = JsonConvert.DeserializeObject<ReturnList<NewtonsoftJsonDefaultValueModel>>(msg);
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task NewtonsoftJsonTestCase2()
+        {
+            var a = new List<int>() { 1, 2, 107, 4 };
+            var convertA = JsonConvert.SerializeObject(a);
+            convertA.ShouldBe("[1,2,107,4]");
+            return Task.CompletedTask;
+        }
+
+        public class Input
+        {
+            [JsonProperty("product_number")]
+            public int ProductNumber;
+
+            [JsonProperty("inference_date")]
+            public string InferenceDate;
+
+            [JsonProperty("succeeded")]
+            public bool Succeeded;
+
+            [JsonProperty("msg")]
+            public string Msg;
+
+            [JsonProperty("model")]
+            public string Model;
+
+            [JsonProperty("data")]
+            public Dictionary<string, string> Data;
+        }
+        [Fact]
+        public Task NewtonsoftJsonTestCase3()
+        {
+            var a = "{\"0\": {\"product_number\": 3, \"inference_date\": \"2021-11-22\", \"succeeded\": true, \"msg\": \"Ok\", \"model\": \"Transformer\", \"data\": {\"2021-10-16\": \"7\", \"2021-10-17\": \"7\", \"2021-10-18\": \"7\", \"2021-10-19\": \"7\", \"2021-10-20\": \"7\", \"2021-10-21\": \"7\", \"2021-10-22\": \"7\"}}, \"1\": {\"product_number\": 80, \"inference_date\": \"2021-11-22\", \"succeeded\": true, \"msg\": \"Only 1 datapoint\", \"model\": \"Forward Filled\", \"data\": {\"2021-08-25\": \"13\", \"2021-08-26\": \"13\", \"2021-08-27\": \"13\", \"2021-08-28\": \"13\", \"2021-08-29\": \"13\", \"2021-08-30\": \"13\", \"2021-08-31\": \"13\"}}, \"2\": {\"product_number\": 164, \"inference_date\": \"2021-11-22\", \"succeeded\": true, \"msg\": \"Not enough datapoint\", \"model\": \"Extrapolated\", \"data\": {\"2021-10-13\": \"12\", \"2021-10-14\": \"12\", \"2021-10-15\": \"12\", \"2021-10-16\": \"12\", \"2021-10-17\": \"12\", \"2021-10-18\": \"12\", \"2021-10-19\": \"12\"}}, \"3\": {\"product_number\": 210, \"inference_date\": \"2021-11-22\", \"succeeded\": true, \"msg\": \"Only 1 datapoint\", \"model\": \"Forward Filled\", \"data\": {\"2021-09-29\": \"11\", \"2021-09-30\": \"11\", \"2021-10-01\": \"11\", \"2021-10-02\": \"11\", \"2021-10-03\": \"11\", \"2021-10-04\": \"11\", \"2021-10-05\": \"11\"}}, \"4\": {\"product_number\": 154, \"inference_date\": \"2021-11-22\", \"succeeded\": true, \"msg\": \"Not enough datapoint\", \"model\": \"Extrapolated\", \"data\": {\"2021-09-10\": \"14\", \"2021-09-11\": \"15\", \"2021-09-12\": \"14\", \"2021-09-13\": \"13\", \"2021-09-14\": \"13\", \"2021-09-15\": \"14\", \"2021-09-16\": \"16\"}}}";
+            var convertA = JsonConvert.DeserializeObject<Dictionary<string, Input>>(a);
+
+            if (convertA != null)
+            {
+                var test = convertA.Values.FirstOrDefault(x => x.ProductNumber == 3);
+
+                var test2 = new Dictionary<string, Input>();
+                var test22 = test2.Values.FirstOrDefault(x => x.ProductNumber == 3);
+                test22.ShouldBeNull();
+                test.ShouldBeNull();
+            }
+
             return Task.CompletedTask;
         }
     }
