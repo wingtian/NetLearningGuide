@@ -554,5 +554,29 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             result.Count().ShouldBe(12);
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task SingleOrDefaultCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var value2 = list.SingleOrDefault(x => x.Name == "Jame");
+
+            Exception asyncFunction = Should.Throw<Exception>(() =>
+            {
+                var value3 = list.SingleOrDefault(x => x.Name == "James");
+            });
+            asyncFunction.Source.ShouldNotBeNull();
+            value2.ShouldBeNull();
+            return Task.CompletedTask;
+        }
+
     }
 }
