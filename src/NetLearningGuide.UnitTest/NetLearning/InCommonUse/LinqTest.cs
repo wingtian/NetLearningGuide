@@ -550,7 +550,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
             };
-            var result = list.Concat(list2); 
+            var result = list.Concat(list2);
             result.Count().ShouldBe(12);
             return Task.CompletedTask;
         }
@@ -577,6 +577,23 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             value2.ShouldBeNull();
             return Task.CompletedTask;
         }
-
+        [Fact]
+        public Task FirstOrDefaultCase2()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var value2 = list.FirstOrDefault(x => x.Name == "Jame");
+            var value3 = list.FirstOrDefault(x => x.Name == "James");
+            value2.ShouldBeNull();
+            value3.ShouldNotBeNull();
+            return Task.CompletedTask;
+        }
     }
 }
