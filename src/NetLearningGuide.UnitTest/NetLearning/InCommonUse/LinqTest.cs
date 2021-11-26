@@ -584,7 +584,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             {
                 new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
-                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee ",Age = 1,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
@@ -593,6 +593,23 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             var value3 = list.FirstOrDefault(x => x.Name == "James");
             value2.ShouldBeNull();
             value3.ShouldNotBeNull();
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task TrimExcessCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee ",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            list.Capacity.ShouldBe(8);
+            list.TrimExcess();
+            list.Capacity.ShouldBe(6);
             return Task.CompletedTask;
         }
     }
