@@ -612,5 +612,21 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             list.Capacity.ShouldBe(6);
             return Task.CompletedTask;
         }
+        [Fact]
+        public Task TrueForAllCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee ",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            list.TrueForAll(x => x.CreateDate == DateTime.Today).ShouldBeTrue();
+            list.TrueForAll(x => x.Name == "James").ShouldBeFalse();
+            return Task.CompletedTask;
+        }
     }
 }
