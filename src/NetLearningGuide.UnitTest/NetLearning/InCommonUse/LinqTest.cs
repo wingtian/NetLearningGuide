@@ -613,19 +613,20 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             return Task.CompletedTask;
         }
         [Fact]
-        public Task TrueForAllCase1()
+        public Task DistinctByCase1()
         {
             var list = new List<LinqModel>()
             {
                 new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
-                new LinqModel(){Name = "Gluee ",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
             };
-            list.TrueForAll(x => x.CreateDate == DateTime.Today).ShouldBeTrue();
-            list.TrueForAll(x => x.Name == "James").ShouldBeFalse();
+            var test = list.DistinctBy(x => x.Name).ToList();
+            test.Count(x=>x.Name == "James").ShouldBe(1);
+            test.Count(x => x.Name == "Gluee").ShouldBe(1);
             return Task.CompletedTask;
         }
     }
