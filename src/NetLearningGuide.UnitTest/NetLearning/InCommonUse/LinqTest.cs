@@ -625,8 +625,25 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
             };
             var test = list.DistinctBy(x => x.Name).ToList();
-            test.Count(x=>x.Name == "James").ShouldBe(1);
+            test.Count(x => x.Name == "James").ShouldBe(1);
             test.Count(x => x.Name == "Gluee").ShouldBe(1);
+            return Task.CompletedTask;
+        }
+        //查询速度变快
+        [Fact]
+        public Task AsParallelCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var test = list.AsParallel().Where(x=>x.Age == 1).ToList();
+            test.Count.ShouldBe(4);
             return Task.CompletedTask;
         }
     }
