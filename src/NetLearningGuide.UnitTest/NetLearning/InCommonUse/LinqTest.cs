@@ -641,7 +641,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
                 new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
                 new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
-            }; 
+            };
             var test = list.AsParallel().Where(x => x.Age == 1).ToList();
             test.Count.ShouldBe(4);
             return Task.CompletedTask;
@@ -660,6 +660,25 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             };
             var test = list.Average(x => x.Age);
             test.ShouldBe(1.3333333333333333d);
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task ElementAtCase1()
+        {
+            var list = new List<LinqModel>()
+            {
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 2,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "James",Age = 1,CreateDate = DateTime.Today},
+                new LinqModel(){Name = "Gluee",Age = 1,CreateDate = DateTime.Today},
+            };
+            var test = list.ElementAt(3);
+            test.Name.ShouldBe("Gluee");
+            test.Age.ShouldBe(2);
+            test.CreateDate.ShouldBe(DateTime.Today);
             return Task.CompletedTask;
         }
     }
