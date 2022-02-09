@@ -102,6 +102,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ShouldBe(3);
             var test2 = (Week)Enum.Parse(typeof(Week), "3");
             test2.ShouldBe(Week.Monday | Week.Tuesday);
+            var ttt = test2.ToString();
             var test21 = ((WeekEnum)Enum.Parse(typeof(WeekEnum), "3")).ToString();
             test21.ShouldBe("3");
             var test3 = (Week)Enum.Parse(typeof(Week), "127");

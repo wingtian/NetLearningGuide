@@ -357,7 +357,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             };
             var test = new List<InputTest>();
 
-            int j = 1;
+            int j = 10;
             for (int i = 0; i < list.Count; i += 1)
             {
                 var cList = list.Take(j).Skip(i).ToList();

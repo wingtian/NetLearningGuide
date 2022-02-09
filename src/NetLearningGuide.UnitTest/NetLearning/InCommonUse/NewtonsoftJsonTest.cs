@@ -243,5 +243,24 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
 
             return Task.CompletedTask;
         }
+
+
+        [Fact]
+        public async Task NewtonsoftJsonTestCase4()
+        {
+            var test = IsInt("5");
+        }
+        private bool IsInt(string value)
+        {
+            try
+            {
+                Convert.ToDecimal(value);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -42,6 +42,17 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.ToString("#0.00").ShouldBe("1.20");
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task MathRoundTestCase5()
+        {
+            double? getRate = 75d / 100d; //.轉換比例 UMREZ/UMREN
+            var sapCost = 7.66m;
+            var cost = Math.Round(Convert.ToDecimal(sapCost * Convert.ToDecimal(getRate)), 2, MidpointRounding.AwayFromZero);
+            var rate = Convert.ToDecimal(getRate);
+            cost.ShouldBe(5.75m);
+            return Task.CompletedTask;
+        }
         [Fact]
         public Task MathFloorTestCase1()
         {
@@ -226,7 +237,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         [Fact]
         public Task MathLogTestCase1()
         {
-            var test = Math.Log(4,2);
+            var test = Math.Log(4, 2);
             test.ShouldBe(2);
             return Task.CompletedTask;
         }
@@ -248,7 +259,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         [Fact]
         public Task MathMaxMagnitudeTestCase1()
         {
-            var test = Math.MaxMagnitude(100,200);
+            var test = Math.MaxMagnitude(100, 200);
             test.ShouldBe(200d);
             return Task.CompletedTask;
         }
