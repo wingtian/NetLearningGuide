@@ -41,5 +41,13 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             return Regex.IsMatch(value, @"^[+-]?\d*$");
         }
+
+        [Fact]
+        public Task SubStringTest()
+        {
+            string test = "0000123PDC";
+            test = test.Substring(0, 3);
+            return Task.CompletedTask;
+        }
     }
 }

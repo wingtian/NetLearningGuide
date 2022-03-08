@@ -681,5 +681,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             test.CreateDate.ShouldBe(DateTime.Today);
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task ElementAtCase2()
+        {
+            var guid = new Guid("ORD000237012-001008");
+            return Task.CompletedTask;
+        }
     }
 }

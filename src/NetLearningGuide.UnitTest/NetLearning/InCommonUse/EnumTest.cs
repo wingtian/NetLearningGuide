@@ -209,7 +209,7 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         }
         [Fact]
         public Task EnumFlagsTestCase11()
-        { 
+        {
             var getAll = (int)Week.Sunday * 2 - 1;
             var test1 = (Week)Enum.Parse(typeof(Week), getAll.ToString());
             test1.ShouldBe(Week.Monday | Week.Tuesday | Week.Wednesday | Week.Thursday | Week.Friday | Week.Saturday | Week.Sunday);
@@ -221,6 +221,17 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var test = WeekEnum.Monday.ToString();
             test.ShouldBe("Monday");
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task EnumFlagsForeachTestCase()
+        {
+            foreach (WeekEnum item in Enum.GetValues(typeof(WeekEnum)))
+            {
+                var key = (int)item;
+                var value = item.ToString();
+            }
             return Task.CompletedTask;
         }
     }
