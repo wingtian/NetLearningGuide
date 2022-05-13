@@ -54,6 +54,12 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             return Task.CompletedTask;
         }
         [Fact]
+        public Task MathRoundTestCase6()
+        {
+            var test = Math.Round(Convert.ToDecimal("0.109"), 2);
+            return Task.CompletedTask;
+        }
+        [Fact]
         public Task MathFloorTestCase1()
         {
             var test = Convert.ToInt16(Math.Floor(1.1m));
@@ -262,6 +268,45 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
             var test = Math.MaxMagnitude(100, 200);
             test.ShouldBe(200d);
             return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task MathMaxMagnitudeTestCase2()
+        {
+            decimal min = 0.8m;
+            decimal max = 0.8m;
+            var temp = (max - min) / 100.00m;
+            var result = Math.Round(min + temp * new Random().Next(0, 100), 2);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task MathMaxMagnitudeTestCase3()
+        {
+            List<Test> test = new List<Test>();
+            var count = test.Sum(x => x.Count);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task MathMaxMagnitudeTestCase31()
+        {
+            string test = "a1aa";
+            string test1 = "abc";
+            int reval = 0;
+            var result = ConvertName(test, test1);
+            result.ShouldBe("abc");
+            return Task.CompletedTask;
+        }
+
+        private static string ConvertName(string str, string replaceName)
+        {
+            int reval = 0;
+            if (string.IsNullOrEmpty(str) || int.TryParse(str[0].ToString(), out reval))
+                return replaceName;
+            return str;
+        }
+        private class Test
+        {
+            public int Count { get; set; }
         }
     }
 }

@@ -2,7 +2,9 @@
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -687,6 +689,146 @@ namespace NetLearningGuide.UnitTest.NetLearning.InCommonUse
         {
             var guid = new Guid("ORD000237012-001008");
             return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task DateSelectCase1()
+        {
+            var selectDate = Convert.ToDateTime("2022-04-10");
+            var dateList = new List<DateTime>()
+            {
+                Convert.ToDateTime("2021-04-08"),
+                Convert.ToDateTime("2022-04-08"),
+                Convert.ToDateTime("2022-04-20")
+            };
+            var test = GetNearDate(selectDate, dateList);
+            return Task.CompletedTask;
+        }
+
+        private DateTime GetNearDate(DateTime time, List<DateTime> inputList)
+        {
+            if (time == DateTime.MinValue || time == DateTime.MaxValue)
+                return time;
+            if (inputList == null)
+                return time;
+            var isFind = false;
+            var counter = 0;
+            while (!isFind)
+            {
+                if (inputList.Contains(time.AddDays(counter)))
+                    return time.AddDays(counter);
+                if (inputList.Contains(time.AddDays(-counter)))
+                    return time.AddDays(-counter);
+                counter++;
+                if (counter > 100000)
+                    isFind = true;
+            }
+            return time;
+        }
+
+        private decimal GetScore(string inputLevel, string mappingLevel)
+        {
+            decimal score = 100;
+            if (string.IsNullOrEmpty(inputLevel) || string.IsNullOrEmpty(mappingLevel))
+                return 0;
+            for (int i = 1; i <= inputLevel.Length / 3; i++)
+            {
+                int input = Convert.ToInt16(inputLevel.Substring((i - 1) * 3, 3));
+                if (mappingLevel.Length < i * 3)
+                    return score;
+                int mapping = Convert.ToInt16(mappingLevel.Substring((i - 1) * 3, 3));
+            }
+
+            return score;
+        }
+
+        private decimal BaseScore(int length)
+        {
+            return length switch
+            {
+                1 => 1000,
+                2 => 500,
+                3 => 200,
+                4 => 100,
+                5 => 50,
+                6 => 30,
+                7 => 10,
+                8 => 1,
+                _ => 0,
+            };
+        }
+
+        public string ToApiName(string str, string separator = "-")
+        {
+            var r = new Regex(@"
+                (?<=[A-Z])(?=[A-Z][a-z]) |
+                (?<=[^A-Z])(?=[A-Z]) |
+                (?<=[A-Za-z])(?=[^A-Za-z])", RegexOptions.IgnorePatternWhitespace);
+
+            return r.Replace(str, separator).ToLower();
+        }
+        public string ToApiName1(string str, string separator = "-")
+        {
+            var r = new Regex(@"
+                (?<=[A-Z])(?=[A-Z][a-z][^0-9]) |
+                (?<=[^A-Z0-9])(?=[A-Z]) |
+                (?<=[A-Za-z0-9])(?=[^A-Za-z0-9]) ", RegexOptions.IgnorePatternWhitespace);
+
+            return r.Replace(str, separator).ToLower();
+        }
+        [Fact]
+        public Task ToApiNameCase1()
+        {
+            var test = ToApiName("GetZsd17ReportDataFromZrfsd133");
+            var test1 = ToApiName1("GetZsd17ReportDataFromZrfsd133");
+            return Task.CompletedTask;
+        }
+
+        public class TestStudent
+        {
+            public int Count { get; set; }
+        }
+        public class TestStudentExtend : TestStudent
+        {
+            public int Temp { get; set; } = 44;
+        }
+
+        private void Temp(TestStudent test)
+        {
+            test.Count = 1;
+            test = null;
+        }
+
+        [Fact]
+        public Task TestStudentCase1()
+        {
+            var student = new TestStudentExtend();
+            Temp(student);
+            return Task.CompletedTask;
+        }
+        [Fact]
+        public Task TestTime()
+        {
+            var time = Convert.ToDateTime("2022-05-10");
+            int afterWeek = 1;
+            var target = GetNextDateTime(time, afterWeek);
+            return Task.CompletedTask;
+        }
+
+        private DateTime GetNextDateTime(DateTime input, int afterWeek)
+        {
+            if (afterWeek < 1)
+                return input;
+            var temp = input;
+            for (int i = 0; i < 1000; i++)
+            {
+                if (temp.DayOfWeek == DayOfWeek.Monday && i == 0)
+                    return temp.AddDays(7 * afterWeek);
+                if (temp.DayOfWeek == DayOfWeek.Monday && i != 0)
+                    return temp.AddDays(7 * (afterWeek - 1));
+                temp = temp.AddDays(1);
+            }
+            return temp;
         }
     }
 }
